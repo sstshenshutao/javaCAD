@@ -97,10 +97,11 @@ public class V<T> {
 			throw new IllegalArgumentException("The key and the comparator must be unequal null.");
 		// A dummy lsit
 		ListItem<T> dummy = new ListItem<>(null);
+		ListItem<T> current = dummy;
 		for (ListItem<T> p = lst; p != null; p = p.next) {
-			// If the current key is bigger than the given key
 			if (cmp.compare(p.key, key) > 0) {
-				dummy.next = new ListItem<>(p.key);
+				current.next = new ListItem<>(p.key);
+				current = current.next;
 			}
 		}
 		return dummy.next;

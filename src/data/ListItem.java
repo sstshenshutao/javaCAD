@@ -51,10 +51,13 @@ public class ListItem<T> {
 	 *             if the position ist not in the list
 	 */
 	public T get(int pos) throws IllegalArgumentException {
-		// TODO Your task. Please delete the following Code when you are implementing this method.
-		throw new UnsupportedOperationException(
-				"\nThe method get(int pos) in the class data.ListItem is not yet implementated."
-						+ "\nYou first have to implement this method in exercice A1.4.");
+		//shen
+		ListItem<T> p = this;
+		try {
+			for (int i = 1; i <= pos; p = p.next);}
+		catch(Exception e) {
+			throw new IllegalArgumentException();}
+		return p.key;
 	}
 
 	/**
@@ -65,10 +68,11 @@ public class ListItem<T> {
 	 * @return the size of this list
 	 */
 	public int getSize() {
-		// TODO Your task. Please delete the following Code when you are implementing this method.
-		System.out.println("\nThe method getSize() in the class data.ListItem is not yet implementated."
-				+ "\nYou first have to implement this method in exercice A1.4.");
-		return -9999;
+		int length = 0;
+		for (ListItem<T> p = this; p.key != null; p = p.next) {
+			length++;
+		}
+		return length;
 	}
 
 	/**

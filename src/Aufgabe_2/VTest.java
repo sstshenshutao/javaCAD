@@ -75,21 +75,11 @@ public class VTest {
 
 	@Test
 	public void cloneObjectsBiggerThanX() {
-		vInt.cloneObjectsBiggerThanX(this.listAscInt, 6, cmpInt);
-		Assert.assertEquals(0, this.listAscInt.key, 0);
-		Assert.assertEquals(1, this.listAscInt.next.key, 0);
-		Assert.assertEquals(2, this.listAscInt.next.next.key, 0);
-		Assert.assertEquals(3, this.listAscInt.next.next.next.key, 0);
-		Assert.assertEquals(4, this.listAscInt.next.next.next.next.key, 0);
-		Assert.assertEquals(5, this.listAscInt.next.next.next.next.next.key, 0);
-		Assert.assertEquals(6, this.listAscInt.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(7, this.listAscInt.next.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(7, this.listAscInt.next.next.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(8, this.listAscInt.next.next.next.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(8, this.listAscInt.next.next.next.next.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(9, this.listAscInt.next.next.next.next.next.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(9, this.listAscInt.next.next.next.next.next.next.next.next.next.next.next.next.key, 0);
-		Assert.assertEquals(null, this.listAscInt.next.next.next.next.next.next.next.next.next.next.next.next.next);
+		ListItem<Integer> res = vInt.cloneObjectsBiggerThanX(this.listAscInt, 6, cmpInt);
+
+		Assert.assertEquals(res.key, 7, 0);
+		Assert.assertEquals(res.next.key, 8, 0);
+		Assert.assertEquals(res.next.next.key, 9,0);
 	}
 
 	@Test
