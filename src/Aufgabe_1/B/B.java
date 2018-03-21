@@ -2,10 +2,7 @@ package Aufgabe_1.B;
 
 import data.ListItem;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-
-import Aufgabe_1.V.V;
 
 /**
  * Tasks of subproject 1.B
@@ -29,33 +26,8 @@ public class B<T> {
 	 *             if arr is null
 	 */
 	public void rotateQuadrupleLeft(T[] arr) throws IllegalArgumentException {
-		T fst = null;
-		if (arr.length<4) return;
-		try {
-			//record the first Element of array, if arr eine null-Referenz goto catch
-			fst = arr[0];
-			//recursive start
-			rotateQuadrupleLeftRec(arr, 0);
-		}catch(IndexOutOfBoundsException e) {
-			//recursive end
-			arr[arr.length-1] = fst;
-		}catch(NullPointerException e) {
-			throw new IllegalArgumentException();
-		}
+		// TODO Your task
 		return;
-	}
-	/**
-	 * Recursive helper method for rotateQuadrupleLeft.
-	 *
-	 * @param arr
-	 *            the array to work on
-	 * @param index
-	 */
-	private void rotateQuadrupleLeftRec(T[] arr, int index) {
-		// If the array is null, throw the IndexOutOfBoundsException, let the callfunction handle it.
-		arr[index]=arr[index+1];
-		//else recursive shift
-		rotateQuadrupleLeftRec(arr, index+1);
 	}
 
 	/**
@@ -74,36 +46,10 @@ public class B<T> {
 	 *             if key or cmp is null
 	 */
 	public ListItem<T> insertSingle(ListItem<T> lst, T key, Comparator<T> cmp) throws IllegalArgumentException {
-		//add the ListItem 
-		if (key == null || cmp == null) throw new IllegalArgumentException();
-		ListItem<T> p = new ListItem<T>(key);
-		//is (the new key < the head Item(the least) of sortedList "lst") 
-		if (cmp.compare(p.key, sortList(lst, cmp).key) < 0){
-			//p is the least one in the whole list
-			p.next=lst;
-			return p;
-		}else {
-			//p is not the least one in the whole list, then add it to the list and sort the new whole list together.
-			p.next=lst;
-			return sortList(p, cmp);
-		}
+		// TODO Your task
+		return null;
 	}
-	
-	/** 
-	 * sort a list, als a helper method for insertSingle
-	 * @param lst
-	 * @param cmp
-	 * @return the sortedList
-	 */
-	private ListItem<T> sortList(ListItem<T> lst, Comparator<T> cmp){
-		//if the whole list just have one Item, then it is the greatest one.
-		//if the whole list has other Items, call insertSingle, to insert the first key of the list into the left list
-		// and insertSingle ensure that the returned list is in the increasing Order.
-		return (lst.next == null)? lst: insertSingle(lst.next, lst.key, cmp);
-	}
-	
-	
-	
+
 	/**
 	 * Löscht das Kopf-Element des Parameters lst. Die Methode gibt den neuen Listenkopf zurück. Wenn für lst eine
 	 * null-Referenz übergeben wird, ist der Kopf als bereits gelöscht anzusehen. Implementieren Sie diese Methode in
@@ -114,8 +60,8 @@ public class B<T> {
 	 * @return list with a new head
 	 */
 	public ListItem<T> removeHead(ListItem<T> lst) {
-		// how to ensure the "konstante Laufzeit"
-		return (lst == null)?lst:(lst.next);
+		// TODO Your task
+		return null;
 	}
 
 	/**
@@ -128,39 +74,8 @@ public class B<T> {
 	 * @return the new list
 	 */
 	public ListItem<T> ringShiftRight(ListItem<T> lst) {
-		ListItem<T> p = cloneListRec(lst);
-		ListItem<T> newHeader = popLastRec(p);
-		newHeader.next = p;
-		return popLastRec(newHeader);
-	}
-	
-	/** recursive pop the last Item of List
-	 * @param lst
-	 * @return the poped Item (tail)
-	 */
-	private ListItem<T> popLastRec(ListItem<T> lst){
-		if (lst.next == null) {
-			ListItem<T> tmp = cloneListRec(lst);
-			lst = null;
-			return tmp;
-		}else {
-			return popLastRec(lst.next);
-		}
-	}
-	
-	/**
-	 * Recursive clone a list
-	 * @param lst
-	 * @return the cloned list
-	 */
-	private ListItem<T> cloneListRec(ListItem<T> lst){
-		if (lst == null) {
-			return null;
-		}else {
-			ListItem<T> p = new ListItem<T>(lst.key);
-			p.next= cloneListRec(lst.next);
-			return p;
-		}
+		// TODO Your task
+		return null;
 	}
 
 	/**
@@ -173,15 +88,8 @@ public class B<T> {
 	 * @return List of (List of T)
 	 */
 	public ListItem<ListItem<T>> listInLists(ListItem<T> lst) {
-		ListItem<ListItem<T>> llst= new ListItem<ListItem<T>>(null);
-		for(ListItem<T> p = lst; p != null; p= p.next ) {
-			ListItem<T> tmp = new ListItem<T>(p.key);
-			tmp.next = null;
-			ListItem<ListItem<T>> tmpl = new ListItem<ListItem<T>>(tmp);
-			llst.next = tmpl;
-			llst = llst.next;
-		}
-		return llst.next;
+		// TODO Your task
+		return null;
 	}
 
 	/**
@@ -198,15 +106,7 @@ public class B<T> {
 	 *             if type is null
 	 */
 	public T[] selectType(ListItem<T> lst, Class<? extends T> type) throws IllegalArgumentException {
-		if (type == null) throw new IllegalArgumentException();
-		ArrayList<T> arrT= new ArrayList<T>();
-		for(ListItem<T> p = lst; p != null; p= p.next) {
-			if (p.key.getClass() == type) {
-				arrT.add(p.key);
-			}
-		}
-		//dont need check cast, because has already checked the class
-		T[] retT = (T[])arrT.toArray();
-		return retT;
+		// TODO Your task
+		return null;
 	}
 }

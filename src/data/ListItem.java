@@ -54,7 +54,7 @@ public class ListItem<T> {
 		//shen
 		ListItem<T> p = this;
 		try {
-			for (int i = 1; i < pos; i++) p = p.next;}
+			for (int i = 1; i <= pos; p = p.next);}
 		catch(Exception e) {
 			throw new IllegalArgumentException();}
 		return p.key;
@@ -69,7 +69,7 @@ public class ListItem<T> {
 	 */
 	public int getSize() {
 		int length = 0;
-		for (ListItem<T> p = this; p != null; p = p.next) {
+		for (ListItem<T> p = this; p.key != null; p = p.next) {
 			length++;
 		}
 		return length;

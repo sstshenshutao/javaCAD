@@ -17,7 +17,6 @@ public class ComparatorSurface implements Comparator<RoundGeometricElement> {
 	@Override
 	public int compare(RoundGeometricElement elem1, RoundGeometricElement elem2) {
 		// TODO Your task
-		elem1.getNumberOfPoints()
 		return 0;
 	}
 }
