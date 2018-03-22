@@ -2,6 +2,7 @@ package Aufgabe_1.B;
 
 import data.ListItem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -199,7 +200,10 @@ public class B<T> {
 	 *             if type is null
 	 */
 	public T[] selectType(ListItem<T> lst, Class<? extends T> type) throws IllegalArgumentException {
+
+//		use ArrayList:
 		if (type == null) throw new IllegalArgumentException();
+		
 		ArrayList<T> arrT= new ArrayList<T>();
 		for(ListItem<T> p = lst; p != null; p= p.next) {
 			if (p.key.getClass() == type) {
@@ -207,7 +211,8 @@ public class B<T> {
 			}
 		}
 		//dont need check cast, because has already checked the class
-		T[] retT = (T[])arrT.toArray();
+		T[] retT = (T[]) Array.newInstance(type, arrT.size());
+		retT = (T[])arrT.toArray(retT);
 		return retT;
 	}
 }

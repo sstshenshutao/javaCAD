@@ -4,6 +4,8 @@
 package model.angled;
 
 import model.GeometricModelElement;
+import model.Point;
+import util.Constants;
 
 /**
  * @author Shutao Shen
@@ -11,20 +13,13 @@ import model.GeometricModelElement;
  */
 public class TriangleElement extends AngledGeometricElement {
 
-	/**
-	 * 
-	 */
-	public TriangleElement() {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see model.GeometricModelElement#getJSONClassName()
 	 */
 	@Override
 	protected String getJSONClassName() {
-		// TODO Auto-generated method stub
-		return null;
+		return Constants.GEOMETRIC_ANGLED_TRIANGLE_ELEMENT;
 	}
 
 	/* (non-Javadoc)
