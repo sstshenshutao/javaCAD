@@ -236,6 +236,7 @@ public class MainView extends JFrame {
 	 *            picture name to be added
 	 */
 	public void addPictureName(String name) {
+		//加入文件名到下拉框中
 		pictureNames.addItem(name);
 		pictureNames.setSelectedItem(name);
 	}

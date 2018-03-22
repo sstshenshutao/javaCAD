@@ -170,11 +170,17 @@ public class MainController {
 	 *            name of the new picture
 	 */
 	public void setLoadedElement(ListItem<GeometricModelElement> g, String n) {
-		model.addPicture(g, n);
+		model.addPicture(g, n);//（model继承自piclist）
+		//存入modelpiclist
 		ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(g);
-		view.addPicture(gView, n);
+		//返回了gGraphicEle,相当于转换了gModel->gGraphiecEle
+		view.addPicture(gView, n);//（view继承自piclist）
+		//存入viewpiclist
 		this.positionOfSelectedPicture = model.getLength() - 1;
+		//得到最后加入pic(g,n)的位置
 		mainView.addPictureName(n);
+		//加入图片名字到下拉框中，并且选中
 		mainView.showPicture(gView);
+		//gGraphicEle传给主view
 	}
 }

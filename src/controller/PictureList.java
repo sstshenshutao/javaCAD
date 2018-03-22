@@ -41,12 +41,12 @@ public abstract class PictureList<T> {
 	 */
 	public void addPicture(T lst, String name) {
 		if (lst != null) {
-			list.add(lst);
+			list.add(lst);//这里的lst可以是listitem<geo>,把lst 加入piclist.list中
 			String[] names = new String[this.names.length + 1];
 			for (int i = 0; i + 1 < names.length; i++)
 				names[i] = this.names[i];
 			names[names.length - 1] = name;
-			this.names = names;
+			this.names = names;//把name加入到piclist.names里面
 		}
 	}
 

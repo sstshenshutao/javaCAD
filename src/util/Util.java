@@ -67,7 +67,9 @@ public class Util {
 	 */
 	public static Class<? extends GeometricModelElement> getGeometricElementsClass(String classname) {
 		for (int i = 0; i < Constants.GEOMETRIC_MODEL_CLASS_NAMES.length; i++)
-			if (classname.equals(Constants.GEOMETRIC_MODEL_CLASS_NAMES[i]))
+			//例如："geometric.round.EllipseElement" "geometric.round.ellipse.CircleElement", 需要添加model.angeld....
+			// All names of the model classes. The order must be equal to the order of GEOMETRIC_MODEL_CLASSES
+			if (classname.equals(Constants.GEOMETRIC_MODEL_CLASS_NAMES[i]))//
 				return Constants.GEOMETRIC_MODEL_CLASSES[i];
 		return null;
 	}

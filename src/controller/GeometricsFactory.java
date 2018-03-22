@@ -32,6 +32,8 @@ public class GeometricsFactory {
 	 * @return corresponding graphic for the view side
 	 */
 	public static GeometricGraphicElement makeGeometricGraphicElement(GeometricModelElement element) {
+		//gModel转gGraphic，如果是圆类型的g设置了metadata
+		
 		// the points have to be split into x and y positions
 		Point[] points = element.getPoints();
 		double[] xs = new double[points.length];
@@ -40,7 +42,7 @@ public class GeometricsFactory {
 		int counter = 0;
 		// transfer from raster scale to pixel scale
 		for (Point point : points) {
-			xs[counter] = Util.getPixelPosition(point.getX());
+			xs[counter] = Util.getPixelPosition(point.getX()); //乘了个系数30而已
 			ys[counter] = Util.getPixelPosition(point.getY());
 			counter++;
 		}
@@ -51,7 +53,7 @@ public class GeometricsFactory {
 		// get the type out of the class
 		if (element instanceof RoundGeometricElement) {
 			type = Constants.GRAPHIC_TYPE_ROUND;
-			HashMap<String, Object> metaModel = ((RoundGeometricElement) element).getMetaData();
+			HashMap<String, Object> metaModel = ((RoundGeometricElement) element).getMetaData();//第一次读入metadata为空
 			// parse meta data
 			if (metaModel.containsKey(Constants.ANGLE))
 				metaView.put(Constants.ANGLE, metaModel.get(Constants.ANGLE));
@@ -107,7 +109,7 @@ public class GeometricsFactory {
 	 */
 	public static ListItem<GeometricGraphicElement> makePicture(ListItem<GeometricModelElement> model) {
 		ListItem<GeometricGraphicElement> view = new ListItem<GeometricGraphicElement>(null);
-
+		//Gmodel转Ggraphic 返回ListItem《Ggraphic》，并且如果是圆类型设置了metadata
 		for (int j = 1; j <= model.getSize(); j++) {
 			GeometricGraphicElement g = GeometricsFactory.makeGeometricGraphicElement(model.get(j));
 			view.insert(g);
@@ -157,13 +159,13 @@ public class GeometricsFactory {
 	public static void addJSONObjectIntoPictureModelList(JsonObject jObject)
 			throws InstantiationException, IllegalAccessException {
 		ListItem<GeometricModelElement> dummy = new ListItem<GeometricModelElement>(null);
-		JsonArray data = jObject.getJsonArray("data");
+		JsonArray data = jObject.getJsonArray("data");//read "data"
 		JsonObject jGeometricElement;
 		ListItem<GeometricModelElement> p = dummy;
 		for (int i = 0; i < data.size(); i++) {
-			jGeometricElement = data.getJsonObject(i);
-			Class<? extends GeometricModelElement> geometricClass = Util
-					.getGeometricElementsClass(jGeometricElement.getString("classname"));
+			jGeometricElement = data.getJsonObject(i);//read all jGeoEle
+			Class<? extends GeometricModelElement> geometricClass = Util//我们自定义的图形，只要继承自主类都可以
+					.getGeometricElementsClass(jGeometricElement.getString("classname"));//返回类名
 			if (GeometricModelElement.constructFromJSONObject(jGeometricElement, geometricClass) == null)
 				System.out.println(
 						"Some geometric Elements could not be read correctly. Please check the spelling of the classnames:\n"
@@ -173,8 +175,9 @@ public class GeometricsFactory {
 						GeometricModelElement.constructFromJSONObject(jGeometricElement, geometricClass));
 				p = p.next;
 			}
-		}
+		}//把读入的jObj根据读入的类名，造型成相应的类对象，然后加入ListItem容器P中
 		MainController controller = MainController.getInstance();
 		controller.setLoadedElement(dummy.next, jObject.getString("name"));
+		//把读出的listItem返回给controller, 同时传回参数文件名name
 	}
 }
