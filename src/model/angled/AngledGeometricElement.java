@@ -1,6 +1,8 @@
 package model.angled;
 
 import model.GeometricModelElement;
+import model.Point;
+import util.Util;
 
 /**
  * Basic class of the angled picture elements
@@ -21,7 +23,12 @@ public abstract class AngledGeometricElement extends GeometricModelElement {
 
 	@Override
 	protected void calculateScale(double factor) {
-
+		//scale sst
+		Point[] points = this.getPoints();
+		for (Point point : points) {
+			point.setX(point.getX() * factor);
+			point.setY(point.getY() * factor);
+		}
 	}
 
 	@Override
