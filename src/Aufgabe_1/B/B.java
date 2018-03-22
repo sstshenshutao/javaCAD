@@ -77,6 +77,7 @@ public class B<T> {
 		//add the ListItem 
 		if (key == null || cmp == null) throw new IllegalArgumentException();
 		ListItem<T> p = new ListItem<T>(key);
+		if (lst == null) return p;
 		//is (the new key < the head Item(the least) of sortedList "lst") 
 		if (cmp.compare(p.key, sortList(lst, cmp).key) < 0){
 			//p is the least one in the whole list
