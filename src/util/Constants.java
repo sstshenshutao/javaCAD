@@ -54,7 +54,12 @@ public class Constants {
 	public static final int									ACTION_EVENT_SAVE								= 2;
 	public static final int									ACTION_EVENT_READ_JSON							= 3;
 	public static final int									ACTION_EVENT_DO_SOMETHING						= 4;
+	
+	// type of user interaction: GeometricBotton
+	public static final int		  							ACTION_EVENT_GEOMETRIC							= 10;
 
+	
+	
 	// padding to get a little space between the drawing and the the panel border
 	public static final int									paddingWidth									= 30;
 	public static final int									paddingHeight									= 30;

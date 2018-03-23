@@ -132,6 +132,34 @@ public class MainController {
 			view.changePicture(gView, positionOfSelectedPicture);
 			mainView.showPicture(gView);
 		}
+		
+		//botton:
+		if (code == Constants.ACTION_EVENT_GEOMETRIC) {
+			Class<? extends GeometricModelElement> geometricClass = null;
+			if (information instanceof String) {
+				geometricClass = Util.getGeometricElementsClass((String)information);
+			}else return;
+			try {
+				GeometricModelElement geometricElem = geometricClass.newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			//new Dialog to get the Information for geometricElem: colorCode and Points
+			System.out.println("enter draw");
+//			geometricElem.changeColorCode(colorCode);
+//			geometricElem.setPoints(points);
+
+			}
+			
+		
+		
+		
+		
 	}
 
 	/**

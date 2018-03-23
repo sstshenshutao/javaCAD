@@ -191,6 +191,28 @@ public class MainView extends JFrame {
 		// add the third panel to the left of the frame panel
 		add(controllPanel, BorderLayout.EAST);
 
+		// ----------------------------------- DrawPanel and GeometricButton ----------------------------------- \\
+		// create a new Fourth panel and set the LayoutManager
+		JPanel drawPanel = new JPanel();
+		int rows = 4;
+		int cols = 1;//need to calculate later
+		drawPanel.setLayout(new GridLayout(rows, cols));
+		
+		//use Factory to add Buttons
+		JButton circle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ROUND_ELLIPSE_CIRCLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton ellipse = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ROUND_ELLIPSE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton triangle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRIANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton equilateralTriangle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		drawPanel.add(circle);
+		drawPanel.add(ellipse);
+		drawPanel.add(triangle);
+		drawPanel.add(equilateralTriangle);
+		// add the third panel to the left of the frame panel
+		add(drawPanel, BorderLayout.WEST);
+		// ----------------------------------- ChangePanel and ChangeButton ----------------------------------- \\
+		
+		
+		
 		pack();
 		setVisible(true);
 	}
