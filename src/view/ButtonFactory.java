@@ -29,11 +29,9 @@ public class ButtonFactory {
 		Icon jIcon=null;
 		try {jIcon=new ImageIcon(jTitel+".ico");}	catch (Exception e) {jIcon=null;}
 		System.out.println(jIcon.toString());
-		JButton jButton = null;
-//		setToolTipText("点击确定")
-				
+		JButton jButton = null;	
 		if (jIcon!=null) {jButton=new JButton(jIcon);}else {jButton=new JButton(jTitel);}
-		
+		jButton.setToolTipText(new String("draw a "+jTitel));
 		jButton.addActionListener(new ActionListener() {
 
 			@Override
