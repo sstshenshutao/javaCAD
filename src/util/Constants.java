@@ -1,6 +1,8 @@
 package util;
 
 import model.GeometricModelElement;
+import model.angled.EquilateralTriangleElement;
+import model.angled.TriangleElement;
 import model.round.CircleElement;
 import model.round.EllipseElement;
 
@@ -46,7 +48,7 @@ public class Constants {
 	// All classes of the models. The order must be equal to the order of GEOMETRIC_MODEL_CLASS_NAMES
 	@SuppressWarnings("unchecked")
 	public static Class<? extends GeometricModelElement>[]	GEOMETRIC_MODEL_CLASSES							= (Class<? extends GeometricModelElement>[]) new Class<?>[] {
-			EllipseElement.class, CircleElement.class };
+			EllipseElement.class, CircleElement.class, TriangleElement.class, EquilateralTriangleElement.class};
 
 	// type of user interaction
 	public static final int									ACTION_EVENT_DRAW								= 0;
@@ -54,7 +56,15 @@ public class Constants {
 	public static final int									ACTION_EVENT_SAVE								= 2;
 	public static final int									ACTION_EVENT_READ_JSON							= 3;
 	public static final int									ACTION_EVENT_DO_SOMETHING						= 4;
+	
+	// type of user interaction: GeometricBotton
+	public static final int		  							ACTION_EVENT_GEOMETRIC							= 10;
+	
+	// type of user interaction: ChangeBotton
+	public static final int		  							ACTION_EVENT_CHANGE								= 20;
 
+	
+	
 	// padding to get a little space between the drawing and the the panel border
 	public static final int									paddingWidth									= 30;
 	public static final int									paddingHeight									= 30;

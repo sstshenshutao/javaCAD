@@ -8,9 +8,11 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import data.ListItem;
 import model.GeometricModelElement;
+import model.Point;
 import pictures.PictureManipulator;
 import util.Constants;
 import util.Util;
@@ -132,6 +134,82 @@ public class MainController {
 			view.changePicture(gView, positionOfSelectedPicture);
 			mainView.showPicture(gView);
 		}
+		
+		//GeoButton:
+		if (code == Constants.ACTION_EVENT_GEOMETRIC) {
+			Class<? extends GeometricModelElement> geometricClass = null;
+			if (information instanceof String) {
+				geometricClass = Util.getGeometricElementsClass((String)information);
+			}else return;
+			try {
+				GeometricModelElement geometricElem = geometricClass.newInstance();
+				String vollClassname = geometricElem.getClass().toString();
+				String shortClassname = vollClassname.substring(vollClassname.lastIndexOf(".")+1,vollClassname.lastIndexOf("Element"));
+				//new Dialog to get the Information for geometricElem: colorCode and Points
+				boolean signal = false;
+				while (!signal)
+				try {
+					//对话框读入用户输入的参数
+					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname), shortClassname, JOptionPane.QUESTION_MESSAGE);
+					System.out.println(input);
+					String [] inputList = input.split(",");
+					System.out.println(inputList.length);
+					if ((inputList.length % 2) != 1) {throw new Exception();}
+					Point[] points = new Point[inputList.length/2];
+					for (int i=0; i<inputList.length -1 ; i+=2) {
+						points[i/2]=new Point(Double.parseDouble(inputList[i]), Double.parseDouble(inputList[i+1]));
+					}
+					//设置点的信息
+					geometricElem.changeColorCode(Integer.parseInt(inputList[inputList.length-1]));
+					geometricElem.setPoints(points);
+					//存到model里
+					ListItem<GeometricModelElement> modelElements = model.getPicture(positionOfSelectedPicture);
+					modelElements.insert(geometricElem);
+					model.changePicture(modelElements, positionOfSelectedPicture);
+					//更新view
+					ListItem<GeometricGraphicElement> graphicElements = GeometricsFactory.makePicture(modelElements);
+					view.changePicture(graphicElements, positionOfSelectedPicture);
+					//重画
+					mainView.showPicture(graphicElements);
+					signal=true;
+				}catch(Exception e) {
+//					e.printStackTrace();
+					if (JOptionPane.showConfirmDialog(mainView, "wrong input, please try again.")==0) {
+						signal=false;
+					}else{
+						signal=true;
+					}
+				}
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		//GeoButton:
+		if (code == Constants.ACTION_EVENT_CHANGE) {
+			String buttonName = null;
+			if (information instanceof String) {
+				buttonName = (String)information;
+			}else return;
+			switch (buttonName) {
+				case "Move": System.out.println("move");;
+            					break;
+				case "Scale":System.out.println("scale"); ;
+							break;
+				case "Rotation": System.out.println("rotation");;
+							break;
+				case "Mirroring": System.out.println("mirroring");;
+							break;
+			}
+			
+		}
+		
+		
+		
+		
 	}
 
 	/**
