@@ -1,7 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
-
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.ScrollPane;
@@ -195,7 +195,7 @@ public class MainView extends JFrame {
 		// create a new Fourth panel and set the LayoutManager
 		JPanel drawPanel = new JPanel();
 		int rows = 4;
-		int cols = 1;//need to calculate later
+		int cols = 2;//need to calculate later
 		drawPanel.setLayout(new GridLayout(rows, cols));
 		
 		//use Factory to add Buttons
@@ -208,11 +208,26 @@ public class MainView extends JFrame {
 		drawPanel.add(triangle);
 		drawPanel.add(equilateralTriangle);
 		// add the third panel to the left of the frame panel
-		add(drawPanel, BorderLayout.WEST);
+		add(drawPanel,BorderLayout.WEST);
 		// ----------------------------------- ChangePanel and ChangeButton ----------------------------------- \\
-		
-		
-		
+//		// create a new Fourth panel and set the LayoutManager
+//		JPanel changePanel = new JPanel();
+//		int crows = 2;
+//		int ccols = 2;//need to calculate later
+//		changePanel.setLayout(new GridLayout(crows, ccols));
+//		
+		//use Factory to add Buttons
+		JButton move = ButtonFactory.makeChangeButton("Move", Constants.ACTION_EVENT_CHANGE);
+		JButton scale = ButtonFactory.makeChangeButton("Scale", Constants.ACTION_EVENT_CHANGE);
+		JButton rotation = ButtonFactory.makeChangeButton("Rotation", Constants.ACTION_EVENT_CHANGE);
+		JButton mirroring = ButtonFactory.makeChangeButton("Mirroring", Constants.ACTION_EVENT_CHANGE);
+		drawPanel.add(move);
+		drawPanel.add(scale);
+		drawPanel.add(rotation);
+		drawPanel.add(mirroring);
+		// add the third panel to the left of the frame panel
+		add(drawPanel, BorderLayout.WEST);
+				
 		pack();
 		setVisible(true);
 	}

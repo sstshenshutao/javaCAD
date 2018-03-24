@@ -1,6 +1,8 @@
 package util;
 
 import model.GeometricModelElement;
+import model.angled.EquilateralTriangleElement;
+import model.angled.TriangleElement;
 import model.round.CircleElement;
 import model.round.EllipseElement;
 
@@ -46,7 +48,7 @@ public class Constants {
 	// All classes of the models. The order must be equal to the order of GEOMETRIC_MODEL_CLASS_NAMES
 	@SuppressWarnings("unchecked")
 	public static Class<? extends GeometricModelElement>[]	GEOMETRIC_MODEL_CLASSES							= (Class<? extends GeometricModelElement>[]) new Class<?>[] {
-			EllipseElement.class, CircleElement.class };
+			EllipseElement.class, CircleElement.class, TriangleElement.class, EquilateralTriangleElement.class};
 
 	// type of user interaction
 	public static final int									ACTION_EVENT_DRAW								= 0;
@@ -57,6 +59,9 @@ public class Constants {
 	
 	// type of user interaction: GeometricBotton
 	public static final int		  							ACTION_EVENT_GEOMETRIC							= 10;
+	
+	// type of user interaction: ChangeBotton
+	public static final int		  							ACTION_EVENT_CHANGE								= 20;
 
 	
 	

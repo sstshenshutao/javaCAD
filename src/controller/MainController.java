@@ -135,7 +135,7 @@ public class MainController {
 			mainView.showPicture(gView);
 		}
 		
-		//botton:
+		//GeoButton:
 		if (code == Constants.ACTION_EVENT_GEOMETRIC) {
 			Class<? extends GeometricModelElement> geometricClass = null;
 			if (information instanceof String) {
@@ -149,6 +149,7 @@ public class MainController {
 				boolean signal = false;
 				while (!signal)
 				try {
+					//对话框读入用户输入的参数
 					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname), shortClassname, JOptionPane.QUESTION_MESSAGE);
 					System.out.println(input);
 					String [] inputList = input.split(",");
@@ -187,7 +188,24 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
+		//GeoButton:
+		if (code == Constants.ACTION_EVENT_CHANGE) {
+			String buttonName = null;
+			if (information instanceof String) {
+				buttonName = (String)information;
+			}else return;
+			switch (buttonName) {
+				case "Move": System.out.println("move");;
+            					break;
+				case "Scale":System.out.println("scale"); ;
+							break;
+				case "Rotation": System.out.println("rotation");;
+							break;
+				case "Mirroring": System.out.println("mirroring");;
+							break;
+			}
 			
+		}
 		
 		
 		
