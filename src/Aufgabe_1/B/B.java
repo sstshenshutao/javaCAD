@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import Aufgabe_1.V.ComparatorInteger;
 import Aufgabe_1.V.V;
 
 /**
@@ -80,14 +81,17 @@ public class B<T> {
 		ListItem<T> p = new ListItem<T>(key);
 		if (lst == null) return p;
 		//is (the new key < the head Item(the least) of sortedList "lst") 
-		if (cmp.compare(p.key, sortList(lst, cmp).key) < 0){
+		System.out.println("insertSingle"+lst+key);
+		if (cmp.compare(p.key, sortList(lst, cmp).key) <= 0){
 			//p is the least one in the whole list
 			p.next=lst;
 			return p;
 		}else {
 			//p is not the least one in the whole list, then add it to the list and sort the new whole list together.
-			p.next=lst;
-			return sortList(p, cmp);
+			if (lst.next == null) {lst.next = p;}
+			else {
+			insertSingle(lst.next, p.key, cmp);}
+			 return lst;
 		}
 	}
 	
@@ -101,7 +105,9 @@ public class B<T> {
 		//if the whole list just have one Item, then it is the greatest one.
 		//if the whole list has other Items, call insertSingle, to insert the first key of the list into the left list
 		// and insertSingle ensure that the returned list is in the increasing Order.
-		return (lst.next == null)? lst: insertSingle(lst.next, lst.key, cmp);
+		System.out.println("sortList"+lst);
+		if (lst.next != null) insertSingle(lst.next, lst.key, cmp); 
+		return lst;
 	}
 	
 	
@@ -117,7 +123,7 @@ public class B<T> {
 	 */
 	public ListItem<T> removeHead(ListItem<T> lst) {
 		// how to ensure the "konstante Laufzeit"
-		return (lst == null)?lst:(lst.next);
+		return (lst == null)?lst:(lst=lst.next);
 	}
 
 	/**
@@ -215,4 +221,8 @@ public class B<T> {
 		retT = (T[])arrT.toArray(retT);
 		return retT;
 	}
+	
+	
+	
+
 }

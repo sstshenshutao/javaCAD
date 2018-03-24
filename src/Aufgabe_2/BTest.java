@@ -2,6 +2,10 @@ package Aufgabe_2;
 
 import org.junit.Test;
 
+import Aufgabe_1.B.*;
+import Aufgabe_1.V.ComparatorInteger;
+import data.ListItem;
+
 public class BTest {
 
 	/*****************************************************************
@@ -34,6 +38,14 @@ public class BTest {
 
 	@Test
 	public void insertSingle_Test_1() {
+		ListItem<Integer> newlist= new ListItem<Integer>(4);
+		B<Integer> b = new B<>();
+		System.out.println("t"+newlist);
+		newlist.insert(3);
+		System.out.println("t"+newlist);
+		ListItem<Integer> newlist2= b.insertSingle(newlist, new Integer(2), new ComparatorInteger());
+		System.out.println("t"+newlist);
+		System.out.println("t"+newlist2);
 
 	}
 

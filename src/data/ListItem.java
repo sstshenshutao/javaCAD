@@ -1,5 +1,6 @@
 package data;
 
+
 /**
  * An Item of a single linked List
  * 
@@ -68,6 +69,7 @@ public class ListItem<T> {
 	 * @return the size of this list
 	 */
 	public int getSize() {
+		//shen
 		int length = 0;
 		for (ListItem<T> p = this; p != null; p = p.next) {
 			if (p.key != null) length++;
@@ -95,4 +97,16 @@ public class ListItem<T> {
 			p.next = new ListItem<T>(key);
 		}
 	}
+	
+	/** 
+	 * just for test
+	 */
+	public String toString() {
+		String a =new String();
+		for (int i=1;i<=this.getSize();i++) {
+			a+="/"+this.get(i).toString();
+		}
+		return a;
+	}
+	
 }
