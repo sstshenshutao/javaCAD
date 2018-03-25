@@ -150,7 +150,7 @@ public class MainController {
 				while (!signal)
 				try {
 					//对话框读入用户输入的参数
-					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname), shortClassname, JOptionPane.QUESTION_MESSAGE);
+					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname+": x1,y1,x2,y2,....,xn,yn,colorcode"), shortClassname, JOptionPane.QUESTION_MESSAGE);
 					System.out.println(input);
 					String [] inputList = input.split(",");
 					System.out.println(inputList.length);

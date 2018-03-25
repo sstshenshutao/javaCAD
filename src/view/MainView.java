@@ -174,7 +174,7 @@ public class MainView extends JFrame {
 		// ----------------------------------- Button: DO ----------------------------------- \\
 		// create a new third panel and set the LayoutManager
 		JPanel controllPanel = new JPanel();
-		controllPanel.setLayout(new GridLayout(10, 1));
+		controllPanel.setLayout(new GridLayout(15, 1));
 
 		JButton doSomething = new JButton("DO");
 		doSomething.addActionListener(new ActionListener() {
@@ -199,10 +199,23 @@ public class MainView extends JFrame {
 		JButton ellipse = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ROUND_ELLIPSE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton triangle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRIANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton equilateralTriangle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton hexagon=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_HEXAGON_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton regularHexagon=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_HEXAGON_REGULARHEXAGON_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton trapezoid=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRAPEZOID_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton isoscelesTrapezoid=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRAPEZOID_ISOSCELESTRAPEZOID_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton rectangle=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_RECTANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		JButton square=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_RECTANGLE_SQUARE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
+		
 		controllPanel.add(circle);
 		controllPanel.add(ellipse);
 		controllPanel.add(triangle);
 		controllPanel.add(equilateralTriangle);
+		controllPanel.add(hexagon);
+		controllPanel.add(regularHexagon);
+		controllPanel.add(trapezoid);
+		controllPanel.add(isoscelesTrapezoid);
+		controllPanel.add(rectangle);
+		controllPanel.add(square);
 		// add the third panel to the left of the frame panel
 		add(controllPanel,BorderLayout.EAST);
 		// ----------------------------------- ChangePanel and ChangeButton ----------------------------------- \\
