@@ -197,15 +197,20 @@ public class MainController {
 			ListItem<GeometricModelElement> newG =null;
 			switch (buttonName) {
 				case "Move": System.out.println("move");
-							
+						newG = PictureManipulator
+						.movePic(model.getPicture(positionOfSelectedPicture), 1, 1);// need change parameter
             					break;
-				case "Scale":System.out.println("scale"); ;
+				case "Scale":System.out.println("scale"); 
+						newG = PictureManipulator
+						.scalePic(model.getPicture(positionOfSelectedPicture), 1.5);// need change parameter
 							break;
 				case "Rotation": System.out.println("rotation");
-								newG = PictureManipulator
-										.rotatePic(model.getPicture(positionOfSelectedPicture), 15);
+						newG = PictureManipulator
+						.rotatePic(model.getPicture(positionOfSelectedPicture), 15);// need change parameter
 							break;
 				case "Mirroring": System.out.println("mirroring");;
+						newG = PictureManipulator
+						.mirrorPic(model.getPicture(positionOfSelectedPicture), "x");// need change parameter				
 							break;
 			}
 			model.changePicture(newG, positionOfSelectedPicture);

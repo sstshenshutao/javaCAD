@@ -174,7 +174,7 @@ public class MainView extends JFrame {
 		// ----------------------------------- Button: DO ----------------------------------- \\
 		// create a new third panel and set the LayoutManager
 		JPanel controllPanel = new JPanel();
-		controllPanel.setLayout(new GridLayout(1, 0));
+		controllPanel.setLayout(new GridLayout(10, 1));
 
 		JButton doSomething = new JButton("DO");
 		doSomething.addActionListener(new ActionListener() {
@@ -192,41 +192,32 @@ public class MainView extends JFrame {
 		add(controllPanel, BorderLayout.EAST);
 
 		// ----------------------------------- DrawPanel and GeometricButton ----------------------------------- \\
-		// create a new Fourth panel and set the LayoutManager
-		JPanel drawPanel = new JPanel();
-		int rows = 4;
-		int cols = 2;//need to calculate later
-		drawPanel.setLayout(new GridLayout(rows, cols));
+		// add the button to the third panel and set the LayoutManager
 		
 		//use Factory to add Buttons
 		JButton circle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ROUND_ELLIPSE_CIRCLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton ellipse = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ROUND_ELLIPSE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton triangle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRIANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton equilateralTriangle = ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
-		drawPanel.add(circle);
-		drawPanel.add(ellipse);
-		drawPanel.add(triangle);
-		drawPanel.add(equilateralTriangle);
+		controllPanel.add(circle);
+		controllPanel.add(ellipse);
+		controllPanel.add(triangle);
+		controllPanel.add(equilateralTriangle);
 		// add the third panel to the left of the frame panel
-		add(drawPanel,BorderLayout.WEST);
+		add(controllPanel,BorderLayout.EAST);
 		// ----------------------------------- ChangePanel and ChangeButton ----------------------------------- \\
-//		// create a new Fourth panel and set the LayoutManager
-//		JPanel changePanel = new JPanel();
-//		int crows = 2;
-//		int ccols = 2;//need to calculate later
-//		changePanel.setLayout(new GridLayout(crows, ccols));
-//		
+
 		//use Factory to add Buttons
 		JButton move = ButtonFactory.makeChangeButton("Move", Constants.ACTION_EVENT_CHANGE);
 		JButton scale = ButtonFactory.makeChangeButton("Scale", Constants.ACTION_EVENT_CHANGE);
 		JButton rotation = ButtonFactory.makeChangeButton("Rotation", Constants.ACTION_EVENT_CHANGE);
 		JButton mirroring = ButtonFactory.makeChangeButton("Mirroring", Constants.ACTION_EVENT_CHANGE);
-		drawPanel.add(move);
-		drawPanel.add(scale);
-		drawPanel.add(rotation);
-		drawPanel.add(mirroring);
+		controllPanel.add(move);
+		controllPanel.add(scale);
+		controllPanel.add(rotation);
+		controllPanel.add(mirroring);
 		// add the third panel to the left of the frame panel
-		add(drawPanel, BorderLayout.WEST);
+		add(controllPanel, BorderLayout.EAST);
 				
 		pack();
 		setVisible(true);
