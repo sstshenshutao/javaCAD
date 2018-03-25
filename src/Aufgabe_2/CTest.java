@@ -42,7 +42,9 @@ public class CTest {
 
 	@Test
 	public void combine_Test_2() {
-		Assert.assertNull(c.combine(null, arr2, new ComparatorInteger(), Integer.class));
+		Integer[] newarr=c.combine(null, arr2, new ComparatorInteger(), Integer.class);
+		for(int i=0;i<arr2.length;i++) {
+			Assert.assertEquals(arr2[i].intValue(),newarr[i].intValue());}
 	}
 
 	@Test

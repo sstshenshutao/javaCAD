@@ -68,17 +68,24 @@ public class C<T> {
 		  if (cmp == null || type == null)
 		   throw new IllegalArgumentException();
 		  
-		  for (int i = 0; i < arr1.length - 1; i++)
-		  {
-		   if (cmp.compare(arr1[i], arr1[i + 1]) > 0)
-		    throw new IllegalArgumentException();
-		  }
+		  if (arr1== null) return arr2;
+		  if (arr2== null) return arr1;
+		   for (int i = 0; i < arr1.length - 1; i++)
+		   {
+		    if (cmp.compare(arr1[i], arr1[i + 1]) > 0)
+		     throw new IllegalArgumentException();
+		   }
 		  
-		  for (int i = 0; i < arr2.length - 1; i++)
-		  {
-		   if (cmp.compare(arr2[i], arr2[i + 1]) > 0)
-		    throw new IllegalArgumentException();
-		  }
+		  
+		
+		 
+		   for (int i = 0; i < arr2.length - 1; i++)
+		   
+		   {
+		    if (cmp.compare(arr2[i], arr2[i + 1]) > 0)
+		     throw new IllegalArgumentException();
+		   }
+		  
 		  int i1 = arr1.length;
 		  int j1 = arr2.length;
 		  T[] arr3 = (T[]) Array.newInstance(type, i1 + j1);
@@ -86,7 +93,6 @@ public class C<T> {
 		  int j = 0;
 		  hilfecombine(arr1, arr2 ,arr3, cmp, i, j);
 		  return arr3;
-		 
 	  }
 
 	/**
@@ -123,9 +129,9 @@ public class C<T> {
 	 * @return the list without the last element
 	 */
 	public ListItem<T> removeLast(ListItem<T> lst) {
-		if (lst == null)
+		if (lst == null) {
 			return lst;
-		else {
+		}
 			ListItem<T> p = lst;
 			ListItem<T> last = p;
 			while (p.next != null) {
@@ -134,7 +140,6 @@ public class C<T> {
 			}
 			last.next = null;
 			return lst;
-		}
 	}
 
 	/**
@@ -195,11 +200,11 @@ public class C<T> {
 		if(arr == null) {
 			throw new IllegalArgumentException();
 		}	
-		ListItem<T> newlst = new ListItem<T>(arr[0]);
-		ListItem<T> p = newlst;
 		if(arr.length == 0) {
 			return null;
 		}
+		ListItem<T> newlst = new ListItem<T>(arr[0]);
+		ListItem<T> p = newlst;
 		for (int i = 1; i < arr.length; i++) {
 			ListItem<T> item = new ListItem<T>(arr[i]);
 			p.next = item;
