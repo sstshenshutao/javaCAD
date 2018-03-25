@@ -13,6 +13,8 @@ import data.ListItem;
 import model.GeometricModelElement;
 import model.Point;
 import model.angled.AngledGeometricElement;
+import model.angled.SquareElement;
+import model.angled.TrapezoidElement;
 import model.angled.TriangleElement;
 import model.round.CircleElement;
 import model.round.EllipseElement;

@@ -2,6 +2,12 @@ package util;
 
 import model.GeometricModelElement;
 import model.angled.EquilateralTriangleElement;
+import model.angled.HexagonElement;
+import model.angled.IsoscelesTrapezoidElement;
+import model.angled.RectangleElement;
+import model.angled.RegularHexagonElement;
+import model.angled.SquareElement;
+import model.angled.TrapezoidElement;
 import model.angled.TriangleElement;
 import model.round.CircleElement;
 import model.round.EllipseElement;
@@ -38,17 +44,31 @@ public class Constants {
 	// name of the model classes
 	public static final String								GEOMETRIC_ROUND_ELLIPSE_ELEMENT					= "geometric.round.EllipseElement";
 	public static final String								GEOMETRIC_ROUND_ELLIPSE_CIRCLE_ELEMENT			= "geometric.round.ellipse.CircleElement";
-	public static final String								GEOMETRIC_ANGLED_TRIANGLE_ELEMENT				= "geometric.angled.TriangleElement";
-	public static final String								GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT				= "geometric.angled.triangle.EquilateralTriangleElement";	
+	public static final String								GEOMETRIC_ANGLED_TRIANGLE_ELEMENT									= "geometric.angled.TriangleElement";
+	public static final String								GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT				= "geometric.angled.triangle.EquilateralTriangleElement";
+	public static final String								GEOMETRIC_ANGLED_HEXAGON_ELEMENT										= "geometric.angled.HexagonElement";
+	public static final String								GEOMETRIC_ANGLED_HEXAGON_REGULARHEXAGON_ELEMENT						= "geometric.angled.hexagon.RegularHexagonElement";
+	public static final String								GEOMETRIC_ANGLED_TRAPEZOID_ELEMENT									= "geometric.angled.TrapezoidElement";
+	public static final String								GEOMETRIC_ANGLED_TRAPEZOID_ISOSCELESTRAPEZOID_ELEMENT				= "geometric.angled.trapezoid.IsoscelesTrapezoidElement";
+	public static final String								GEOMETRIC_ANGLED_RECTANGLE_ELEMENT									= "geometric.angled.RectangleElement";
+	public static final String								GEOMETRIC_ANGLED_RECTANGLE_SQUARE_ELEMENT							= "geometric.angled.rectangle.SquareElement";
+	
 	// All names of the model classes. The order must be equal to the order of GEOMETRIC_MODEL_CLASSES
 	public static final String[]							GEOMETRIC_MODEL_CLASS_NAMES						= new String[] {
 			GEOMETRIC_ROUND_ELLIPSE_ELEMENT, GEOMETRIC_ROUND_ELLIPSE_CIRCLE_ELEMENT, 
-			GEOMETRIC_ANGLED_TRIANGLE_ELEMENT, GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT	 };
+			GEOMETRIC_ANGLED_TRIANGLE_ELEMENT, GEOMETRIC_ANGLED_TRIANGLE_EQUILATERALTRIANGLE_ELEMENT	,
+			GEOMETRIC_ANGLED_HEXAGON_ELEMENT	, GEOMETRIC_ANGLED_HEXAGON_REGULARHEXAGON_ELEMENT,
+			GEOMETRIC_ANGLED_TRAPEZOID_ELEMENT, GEOMETRIC_ANGLED_TRAPEZOID_ISOSCELESTRAPEZOID_ELEMENT,
+			GEOMETRIC_ANGLED_RECTANGLE_ELEMENT,GEOMETRIC_ANGLED_RECTANGLE_SQUARE_ELEMENT};
 
 	// All classes of the models. The order must be equal to the order of GEOMETRIC_MODEL_CLASS_NAMES
 	@SuppressWarnings("unchecked")
 	public static Class<? extends GeometricModelElement>[]	GEOMETRIC_MODEL_CLASSES							= (Class<? extends GeometricModelElement>[]) new Class<?>[] {
-			EllipseElement.class, CircleElement.class, TriangleElement.class, EquilateralTriangleElement.class};
+			EllipseElement.class, CircleElement.class, 
+			TriangleElement.class, EquilateralTriangleElement.class, 
+			HexagonElement.class, RegularHexagonElement.class,
+			TrapezoidElement.class, IsoscelesTrapezoidElement.class, 
+			RectangleElement.class, SquareElement.class};
 
 	// type of user interaction
 	public static final int									ACTION_EVENT_DRAW								= 0;

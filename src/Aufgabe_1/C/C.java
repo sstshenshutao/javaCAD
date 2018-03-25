@@ -1,5 +1,6 @@
 package Aufgabe_1.C;
 
+import java.lang.reflect.Array;
 import java.util.Comparator;
 
 import data.ListItem;
@@ -47,7 +48,7 @@ public class C<T> {
 		 arr3[i + j] = arr2[j];
 		 hilfecombine(arr1, arr2, arr3, cmp, i, j + 1);
 		}
-
+	 }
 	/**
 	 * Die Methode kombiniert zwei nach dem übergebenem Comparator aufsteigend sortierte Arrays zu einem Array, das
 	 * wiederum gemäß des Comparators aufsteigend sortiert ist, und gibt dieses zurück. Wird für cmp eine null-Referenz
@@ -76,8 +77,16 @@ public class C<T> {
 		  for (int i = 0; i < arr2.length - 1; i++)
 		  {
 		   if (cmp.compare(arr2[i], arr2[i + 1]) > 0)
-		    throw new IllegalArgumentExcept;
+		    throw new IllegalArgumentException();
 		  }
+		  int i1 = arr1.length;
+		  int j1 = arr2.length;
+		  T[] arr3 = (T[]) Array.newInstance(type, i1 + j1);
+		  int i = 0;
+		  int j = 0;
+		  hilfecombine(arr1, arr2 ,arr3, cmp, i, j);
+		  return arr3;
+		 
 	  }
 
 	/**
