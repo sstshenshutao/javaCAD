@@ -131,14 +131,13 @@ public class C<T> {
 	public ListItem<T> removeLast(ListItem<T> lst) {
 		if (lst == null) {
 			return lst;
-		}
+		}else if (lst.next== null) {
+			return null;
+		}else {
 			ListItem<T> p = lst;
-			ListItem<T> last = p;
-			while (p.next != null) {
-				last = p;
-				p = p.next;
-			}
-			last.next = null;
+			for (; p.next.next!= null; p=p.next) ;
+				p.next=null;
+		}
 			return lst;
 	}
 
