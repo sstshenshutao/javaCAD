@@ -32,4 +32,18 @@ public class PictureManipulator {
 		}
 		return newGraphic;
 	}
+	
+	public static ListItem<GeometricModelElement> rotatePic(ListItem<GeometricModelElement> g, double angle) {
+		ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
+
+		for (int j = 1; j <= g.getSize(); j++) {
+			GeometricModelElement e = g.get(j);
+			// rotate
+			e.rotate(angle);
+			newGraphic.insert(e);
+		}
+		return newGraphic;
+	}
+	
+	
 }
