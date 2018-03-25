@@ -417,10 +417,10 @@ public class CTest {
 		elem1.setPoints(new Point[] {new Point(0, 0),new Point(0, 1),new Point(1, 1),new Point(1, 0)});
 		elem1.mirror("x");
 		Point[] points = elem1.getPoints();
-		assertTrue(points[0].getX()==0 && points[0].getY()==0);
-		assertTrue(points[1].getX()==0 && points[1].getY()==1);
-		assertTrue(points[2].getX()==1 && points[2].getY()==1);
-		assertTrue(points[3].getX()==1 && points[3].getY()==0);
+		assertTrue(points[0].getX()==0 && points[0].getY()==1);
+		assertTrue(points[1].getX()==0 && points[1].getY()==0);
+		assertTrue(points[2].getX()==1 && points[2].getY()==0);
+		assertTrue(points[3].getX()==1 && points[3].getY()==1);
 	}
 
 	@Test
@@ -429,8 +429,8 @@ public class CTest {
 		elem1.setPoints(new Point[] {new Point(0, 0),new Point(0, 1),new Point(1, 0)});
 		elem1.mirror("y");
 		Point[] points = elem1.getPoints();
-		assertTrue(points[0].getX()==0 && points[0].getY()==0);
+		assertTrue(points[0].getX()==1 && points[0].getY()==0);
 		assertTrue(points[1].getX()==1 && points[1].getY()==1);
-		assertTrue(points[2].getX()==1 && points[2].getY()==0);
+		assertTrue(points[2].getX()==0 && points[2].getY()==0);
 	}
 }
