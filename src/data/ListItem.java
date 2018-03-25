@@ -98,15 +98,4 @@ public class ListItem<T> {
 		}
 	}
 	
-	/** 
-	 * just for test
-	 */
-	public String toString() {
-		String a =new String();
-		for (int i=1;i<=this.getSize();i++) {
-			a+="/"+this.get(i).toString();
-		}
-		return a;
-	}
-	
 }
