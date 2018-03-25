@@ -80,17 +80,16 @@ public class B<T> {
 		if (key == null || cmp == null) throw new IllegalArgumentException();
 		ListItem<T> p = new ListItem<T>(key);
 		if (lst == null) return p;
+		//sort the list
+		ListItem<T> sList = sortList(lst, cmp);
 		//is (the new key < the head Item(the least) of sortedList "lst") 
-		System.out.println("insertSingle"+lst+key);
-		if (cmp.compare(p.key, sortList(lst, cmp).key) <= 0){
+		if (cmp.compare(p.key, sList.key) <= 0){
 			//p is the least one in the whole list
-			p.next=lst;
+			p.next = sList;
 			return p;
 		}else {
-			//p is not the least one in the whole list, then add it to the list and sort the new whole list together.
-			if (lst.next == null) {lst.next = p;}
-			else {
-			insertSingle(lst.next, p.key, cmp);}
+			//p is not the least one in the whole list, then insertSingle it to the rest list.
+			lst.next = insertSingle(lst.next, p.key, cmp);
 			 return lst;
 		}
 	}
@@ -106,7 +105,7 @@ public class B<T> {
 		//if the whole list has other Items, call insertSingle, to insert the first key of the list into the left list
 		// and insertSingle ensure that the returned list is in the increasing Order.
 		System.out.println("sortList"+lst);
-		if (lst.next != null) insertSingle(lst.next, lst.key, cmp); 
+		if (lst.next != null) lst=insertSingle(lst.next, lst.key, cmp); 
 		return lst;
 	}
 	
