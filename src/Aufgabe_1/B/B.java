@@ -121,7 +121,7 @@ public class B<T> {
 	 * @return list with a new head
 	 */
 	public ListItem<T> removeHead(ListItem<T> lst) {
-		// how to ensure the "konstante Laufzeit"
+		// return next
 		return (lst == null)?lst:(lst=lst.next);
 	}
 
@@ -135,10 +135,13 @@ public class B<T> {
 	 * @return the new list
 	 */
 	public ListItem<T> ringShiftRight(ListItem<T> lst) {
-		ListItem<T> p = cloneListRec(lst);
+		if (lst== null || lst.next==null) {return lst;}
+		ListItem<T> p = lst;
+		//get the last one and then pop it
 		ListItem<T> newHeader = popLastRec(p);
-		newHeader.next = p;
-		return popLastRec(newHeader);
+		//make the rest list behind the header
+		newHeader.next = lst;
+		return newHeader;
 	}
 	
 	/** recursive pop the last Item of List
@@ -146,29 +149,16 @@ public class B<T> {
 	 * @return the poped Item (tail)
 	 */
 	private ListItem<T> popLastRec(ListItem<T> lst){
-		if (lst.next == null) {
-			ListItem<T> tmp = cloneListRec(lst);
-			lst = null;
+		System.out.println("popLastRec"+lst);
+		if (lst.next.next == null) {
+			ListItem<T> tmp = lst.next;
+			lst.next = null;
 			return tmp;
 		}else {
 			return popLastRec(lst.next);
 		}
 	}
 	
-	/**
-	 * Recursive clone a list
-	 * @param lst
-	 * @return the cloned list
-	 */
-	private ListItem<T> cloneListRec(ListItem<T> lst){
-		if (lst == null) {
-			return null;
-		}else {
-			ListItem<T> p = new ListItem<T>(lst.key);
-			p.next= cloneListRec(lst.next);
-			return p;
-		}
-	}
 
 	/**
 	 * Die Methode teilt die übergebene Liste in eine Liste von mehreren einelementrigen Listen auf, wobei jeder
