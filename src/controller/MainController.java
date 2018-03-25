@@ -194,16 +194,29 @@ public class MainController {
 			if (information instanceof String) {
 				buttonName = (String)information;
 			}else return;
+			ListItem<GeometricModelElement> newG =null;
 			switch (buttonName) {
-				case "Move": System.out.println("move");;
+				case "Move": System.out.println("move");
+						newG = PictureManipulator
+						.movePic(model.getPicture(positionOfSelectedPicture), 1, 1);// need change parameter
             					break;
-				case "Scale":System.out.println("scale"); ;
+				case "Scale":System.out.println("scale"); 
+						newG = PictureManipulator
+						.scalePic(model.getPicture(positionOfSelectedPicture), 1.5);// need change parameter
 							break;
-				case "Rotation": System.out.println("rotation");;
+				case "Rotation": System.out.println("rotation");
+						newG = PictureManipulator
+						.rotatePic(model.getPicture(positionOfSelectedPicture), 15);// need change parameter
 							break;
 				case "Mirroring": System.out.println("mirroring");;
+						newG = PictureManipulator
+						.mirrorPic(model.getPicture(positionOfSelectedPicture), "x");// need change parameter				
 							break;
 			}
+			model.changePicture(newG, positionOfSelectedPicture);
+			ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(newG);
+			view.changePicture(gView, positionOfSelectedPicture);
+			mainView.showPicture(gView);
 			
 		}
 		
