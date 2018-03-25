@@ -6,6 +6,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import com.oracle.tools.packager.RelativeFileSet.Type;
+
 import Aufgabe_1.V.ComparatorInteger;
 import Aufgabe_1.V.V;
 
@@ -196,18 +198,22 @@ public class B<T> {
 	 */
 	public T[] selectType(ListItem<T> lst, Class<? extends T> type) throws IllegalArgumentException {
 
-//		use ArrayList:
-		if (type == null) throw new IllegalArgumentException();
+		if (lst==null || type == null) throw new IllegalArgumentException();
+		int arrSize = 0;
+		T[] retT = null;
 		
-		ArrayList<T> arrT= new ArrayList<T>();
 		for(ListItem<T> p = lst; p != null; p= p.next) {
-			if (p.key.getClass() == type) {
-				arrT.add(p.key);
+			if (type.isInstance(p.key)) {
+				arrSize++;
+				//dont need check cast, because has already checked the class
+				T[] newT = (T[]) Array.newInstance(type, arrSize);
+				for(int i=0;i<arrSize-1;i++) {
+					newT[i] = retT[i];
+				}
+				newT[arrSize-1]= p.key;
+				retT = newT;
 			}
 		}
-		//dont need check cast, because has already checked the class
-		T[] retT = (T[]) Array.newInstance(type, arrT.size());
-		retT = (T[])arrT.toArray(retT);
 		return retT;
 	}
 	
