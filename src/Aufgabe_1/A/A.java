@@ -13,6 +13,7 @@ import java.util.Comparator;
  *            Generic Type
  */
 public class A<T> {
+	private int index = 0;
 
 	/**
 	 * Für i = 0, 1, 2, ... vertauscht die Methode die Elemente an den Indizes 3i und 3i + 2, d.h.: Das Element, das
@@ -27,8 +28,34 @@ public class A<T> {
 	 *             if arr is null
 	 */
 	public void invertTriples(T[] arr) throws IllegalArgumentException {
-		// TODO Your task
-		return;
+		if (arr == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		else
+		{
+			if (arr.length < 3 + 3 * index)
+			{
+				index = 0;
+				return;
+			}
+			else if (arr.length == 3 + 3 * index)
+			{
+				T a = arr[index * 3];
+				arr[index * 3] = arr[index * 3 + 2];
+				arr[index * 3 + 2] = a;
+				index = 0;
+				return;
+			}
+			else if (arr.length > 3 + 3 * index)
+			{
+				T a = arr[index * 3];
+				arr[index * 3] = arr[index * 3 + 2];
+				arr[index * 3 + 2] = a;
+				index++;
+				invertTriples(arr);
+			}
+		}
 	}
 
 	/**
@@ -42,8 +69,9 @@ public class A<T> {
 	 * @return the new List
 	 */
 	public ListItem<T> insertSingleHead(ListItem<T> lst, T key) {
-		// TODO Your task
-		return null;
+		ListItem<T> l = new ListItem<T>(key);
+		l.next = lst;
+		return l;
 	}
 
 	/**
@@ -63,8 +91,24 @@ public class A<T> {
 	 *             if key or cmp is null
 	 */
 	public ListItem<T> removeElementsEqualX(ListItem<T> lst, T key, Comparator<T> cmp) throws IllegalArgumentException {
-		// TODO Your task
-		return null;
+		if (key == null || cmp == null)
+			throw new IllegalArgumentException();
+		else if (lst == null)
+		{
+			return lst;
+		}
+		else
+		{
+			if (cmp.compare(lst.key, key) == 0)
+			{
+				return removeElementsEqualX(lst.next, key, cmp);
+			}
+			else
+			{
+				lst.next = removeElementsEqualX(lst.next, key, cmp);
+				return lst;
+			}
+		}
 	}
 
 	/**
@@ -77,8 +121,22 @@ public class A<T> {
 	 * @return the new list
 	 */
 	public ListItem<T> ringShiftLeft(ListItem<T> lst) {
-		// TODO Your task
-		return null;
+		ListItem<T> nlst = new ListItem<T>(null);
+		if (lst == null)
+			return lst;
+		else
+		{	
+			T temp = lst.key;
+			int n = lst.getSize();
+			for (int i = 1; i < n; i++)
+			{
+				T t = lst.next.key;
+				nlst.insert(t);
+				lst = lst.next;
+			}
+			nlst.insert(temp);
+			return nlst;
+		}
 	}
 
 	/**
@@ -96,8 +154,29 @@ public class A<T> {
 	 *             if lsts is null.
 	 */
 	public ListItem<T> listsInList(ListItem<ListItem<T>> lsts) throws IllegalArgumentException {
-		// TODO Your task
-		return null;
+		ListItem<ListItem<T>> nlsts;
+		if (lsts == null)
+			throw new IllegalArgumentException();
+		
+		if (lsts.next == null && lsts.key.next == null)
+			return lsts.key;
+		else
+		{
+			if (lsts.key.next == null)
+			{
+				lsts.key.next = listsInList(lsts.next);
+				return lsts.key; 
+			}
+			else
+			{
+				nlsts = lsts;
+				ListItem<ListItem<T>> nnlsts = new ListItem<ListItem<T>>(lsts.key.next);
+				nnlsts.key = lsts.key.next;
+				nlsts.key.next = listsInList(nnlsts);
+				return nlsts.key;
+			}
+		}
+		
 	}
 
 	/**
@@ -116,7 +195,28 @@ public class A<T> {
 	 *             if arr or cmp is null
 	 */
 	public ListItem<ListItem<T>> arrayRunsToListOfLists(T[] arr, Comparator<T> cmp) throws IllegalArgumentException {
-		// TODO Your task
-		return null;
+		ListItem<ListItem<T>> nlsts = new ListItem<ListItem<T>>(null);
+		ListItem<T> klst = new ListItem<T>(null);
+		if (arr == null || cmp == null)
+			throw new IllegalArgumentException();
+		
+		if (arr.length == 0)
+			return null;
+		
+		
+		for (int i = 0; i < arr.length; i++)
+		{
+			if (klst.key == null || cmp.compare(arr[i - 1], arr[i]) < 0)
+			{
+				klst.insert(arr[i]);
+			}
+			else
+			{
+				nlsts.insert(klst);
+				klst = new ListItem<T>(null);
+			}
+		}
+		nlsts.insert(klst);
+		return nlsts;
 	}
 }

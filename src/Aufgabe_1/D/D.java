@@ -2,6 +2,7 @@ package Aufgabe_1.D;
 
 import data.ListItem;
 
+import java.lang.reflect.Array;
 import java.util.Comparator;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Comparator;
  */
 public class D<T> {
 
+	private int index = 1;
 	/**
 	 * Die Methode vertauscht die Elemente an den zwei angegebenen Indizes. Falls f�r arr eine null-Referenz übergeben
 	 * wird oder einer der Indizes nicht in dem Array liegt, soll eine IllegalArgumentException geworfen werden.
@@ -29,8 +31,15 @@ public class D<T> {
 	 *             if arr is null or Indices is invalid.
 	 */
 	public void switchElements(T[] arr, int ind1, int ind2) throws IllegalArgumentException {
-		// TODO Your task
-		return;
+		if (arr == null)
+			throw new IllegalArgumentException();
+		
+		if (ind1 < 0 || ind1 > arr.length || ind2 < 0 || ind2 > arr.length)
+			throw new IllegalArgumentException();
+		
+		T temp = arr[ind1];
+		arr[ind1] = arr[ind2];
+		arr[ind2] = temp;
 	}
 
 	/**
@@ -44,8 +53,12 @@ public class D<T> {
 	 * @return the list lst with elem added to the end
 	 */
 	public ListItem<T> insertLast(ListItem<T> lst, ListItem<T> elem) {
-		// TODO Your task
-		return null;
+		for (int i = 0; i < elem.getSize(); i++)
+		{
+			lst.insert(elem.key);
+			elem = elem.next;
+		}
+		return lst;
 	}
 
 	/**
@@ -61,8 +74,63 @@ public class D<T> {
 	 * @throws IllegalArgumentException
 	 */
 	public ListItem<T> removeSecMaxElement(ListItem<T> lst, Comparator<T> cmp) throws IllegalArgumentException {
-		// TODO Your task
-		return null;
+		if (cmp == null)
+			throw new IllegalArgumentException();
+		
+		int n =lst.getSize();
+		T max = null;
+		T semax = null;
+		ListItem<T> nlst = lst;
+		for (int i = 0; i < n; i++)
+		{
+			if (max == null)
+			{
+				max = nlst.key;
+				nlst = nlst.next;
+			}
+			else if (cmp.compare(max, nlst.key) < 0)
+			{
+				semax = max;
+				max = nlst.key;
+				nlst = nlst.next;
+			}
+			else if (cmp.compare(max, nlst.key) == 0)
+			{
+				nlst = nlst.next;
+			}
+			else if (semax == null)
+			{
+				semax = nlst.key;
+				nlst = nlst.next;
+			}
+			else if (cmp.compare(semax, nlst.key) < 0)
+			{
+				semax = nlst.key;
+				nlst = nlst.next;
+			}
+			else
+			{
+				nlst = nlst.next;
+			}
+		}
+		if (semax != null)
+		{
+			nlst = lst;
+			lst = new ListItem<T>(null);
+			for (int j = 0; j < n; j++)
+			{
+				if (cmp.compare(semax, nlst.key) == 0)
+				{
+					nlst = nlst.next;
+				}
+				else
+				{
+					lst.insert(nlst.key);
+					nlst = nlst.next;
+				}
+			}
+		}
+		return lst;
 	}
 
 	/**
@@ -77,10 +145,48 @@ public class D<T> {
 	 * @return the list where all complete triples are inverted
 	 */
 	public ListItem<T> invertTriples(ListItem<T> lst) {
-		// TODO Your task
-		return null;
+		if (lst == null)
+			throw new IllegalArgumentException();
+		
+		
+		int n = lst.getSize();
+		if (n < index * 3)
+		{
+			index = 1;
+			return lst;
+		}
+		else
+		{
+			ListItem<T> nlst = new ListItem<T>(null);
+			T temp1 = lst.key;
+			lst = lst.next;
+			T temp2 = lst.key;
+			lst = lst.next;
+			T temp3 = lst.key;
+			lst = lst.next;
+			nlst.insert(temp3);
+			nlst.insert(temp2);
+			nlst.insert(temp1);
+			nlst.next.next.next = invertTriples(lst);
+			index++;
+			return nlst;
+		}
 	}
 
+	public ListItem<T> hilfeIntoList(ListItem<T> lst)
+	{
+		if (lst.getSize() <= 2)
+		{
+			return new ListItem<T>(lst.key);
+		}
+		else
+		{
+			ListItem<T> lst1 = new ListItem<T>(lst.key);
+			lst1.next = hilfeIntoList(lst.next.next);
+			return lst1;
+		}
+	}
+	
 	/**
 	 * Die Methode erhält eine Liste und gibt eine Liste von genau zwei Listen zurück, wobei alle Elemente an einer
 	 * ungeraden Position der Eingabeliste in der ersten Liste zu finden sind, alle Elemente der Eingabeliste mit einer
@@ -92,8 +198,31 @@ public class D<T> {
 	 * @return a list of two lists where all list elements of the input list are located
 	 */
 	public ListItem<ListItem<T>> divideAlternatinglyIntoLists(ListItem<T> lst) {
-		// TODO Your task
-		return null;
+		if (lst.getSize() == 0)
+		{
+			ListItem<T> lst1 = new ListItem<T>(null);
+			ListItem<T> lst2 = new ListItem<T>(null);
+			ListItem<ListItem<T>> nlst = new ListItem<ListItem<T>>(lst1);
+			nlst.next.key = lst2;
+			return nlst;
+		}
+		else if (lst.getSize() == 1)
+		{
+			ListItem<T> lst1 = new ListItem<T>(lst.key);
+			ListItem<T> lst2 = new ListItem<T>(null);
+			ListItem<ListItem<T>> nlst = new ListItem<ListItem<T>>(lst1);
+			nlst.next.key = lst2;
+			return nlst;
+		}
+		else
+		{
+			ListItem<T> nst = lst.next;
+			ListItem<T> lst1 = hilfeIntoList(lst);
+			ListItem<T> lst2 =  hilfeIntoList(nst);
+			ListItem<ListItem<T>> nlst = new ListItem<ListItem<T>>(lst1);
+			nlst.next.key = lst2;
+			return nlst;
+		}
 	}
 
 	/**
@@ -108,7 +237,15 @@ public class D<T> {
 	 * @return a array with all key values of the given list
 	 */
 	public T[] listIntoArray(ListItem<T> lst, Class<?> type) {
-		// TODO Your task
-		return null;
+		if (type == null || lst == null)
+			throw new IllegalArgumentException();
+		ListItem<T> nlst = lst;
+		T[] arr = (T[]) Array.newInstance(type, lst.getSize());
+		for (int i = 0; i < lst.getSize(); i++)
+		{
+			arr[i] = nlst.key;
+			nlst = nlst.next;
+		}
+		return arr;
 	}
 }
