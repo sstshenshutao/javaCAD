@@ -76,6 +76,7 @@ public class Constants {
 	public static final int									ACTION_EVENT_SAVE								= 2;
 	public static final int									ACTION_EVENT_READ_JSON							= 3;
 	public static final int									ACTION_EVENT_DO_SOMETHING						= 4;
+	public static final int									ACTION_EVENT_NEW									= 5;
 	
 	// type of user interaction: GeometricBotton
 	public static final int		  							ACTION_EVENT_GEOMETRIC							= 10;

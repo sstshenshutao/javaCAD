@@ -150,14 +150,18 @@ public class C<T> {
 	 * @return the inverted list
 	 */
 	public ListItem<T> invert(ListItem<T> lst) {
-		if(lst == null && lst.next == null){
-			return lst;
-		}
-		ListItem<T> newlst = invert(lst.next);
-		lst.next.next = lst;
-		lst.next = null;
-		return newlst;
-	}
+	    if(lst == null && lst.next == null){
+	     return lst;
+	    }    
+	     ListItem<T> newlst = null;
+	     while (lst != null) {
+	     ListItem<T> next = lst.next;
+	     lst.next = newlst;
+	     newlst = lst;
+	     lst = next;
+	     } 
+	       return newlst;
+	     }
 
 	/**
 	 * Die Methode gibt eine Liste zurück, die an gerader Position alle Elemente aus lst1 und an ungerader Position alle

@@ -54,10 +54,8 @@ public class MainController {
 	public void init() {
 		// init the picture list of the model
 		model = GeometricsFactory.makePictureModelList();
-
 		// makes a list representing the model list
 		view = GeometricsFactory.makePictureGraphicList(model);
-
 		// select a picture randomly by its position in the list
 		positionOfSelectedPicture = (int) (Math.random() * (view.getLength() - 1));
 
@@ -89,11 +87,9 @@ public class MainController {
 			String jsonString = "{\"name\": \"" + name + "\", ";
 			jsonString += "\"data\": [";
 			ListItem<GeometricModelElement> p = selecetedModell;
-			if (p != null && p.next == null)
-				jsonString += p.next.key.toJSON() + "]}";
-			else {
-				for (; p != null && p.key != null && p.next != null && p.next.key != null; p = p.next)
-					jsonString += p.key.toJSON() + ", ";
+			for (; p != null && p.key != null && p.next != null && p.next.key != null; p = p.next)
+	                jsonString += p.key.toJSON() + ", ";
+	        if (p != null && p.key != null) {
 				jsonString += p.key.toJSON() + "]}";
 			}
 			try {
@@ -104,7 +100,7 @@ public class MainController {
 		}
 
 		if (code == Constants.ACTION_EVENT_READ_JSON) {
-			final JFileChooser chooser = new JFileChooser("Verzeichnis w�hlen");
+			final JFileChooser chooser = new JFileChooser("Verzeichnis wählen");
 			File file = new File(Constants.PATH_GRAPHIC_FILES);
 			chooser.setCurrentDirectory(file);
 
@@ -135,8 +131,27 @@ public class MainController {
 			mainView.showPicture(gView);
 		}
 		
+		if (code == Constants.ACTION_EVENT_NEW) {
+			//对话框读入用户输入的参数
+			String name = JOptionPane.showInputDialog(mainView, new String("you want to create a picture? please give the name of the picture"), "new File", JOptionPane.QUESTION_MESSAGE);
+//			System.out.println(input);
+			if (name.trim().length() != 0)
+				{ListItem<GeometricModelElement> g= new ListItem<GeometricModelElement>(null);
+				model.addPicture(g, name);
+				ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(g);
+				view.addPicture(gView, name);
+				this.positionOfSelectedPicture = model.getLength() - 1;
+				mainView.addPictureName(name);
+				mainView.showPicture(gView);
+				}
+		}
 		//GeoButton:
 		if (code == Constants.ACTION_EVENT_GEOMETRIC) {
+			// if the picture new picture?
+			if (model.getLength()==1) {
+					JOptionPane.showMessageDialog(mainView, "this is the example picture, create a new picture for you");
+					setUserInput(Constants.ACTION_EVENT_NEW, null);}
+		
 			Class<? extends GeometricModelElement> geometricClass = null;
 			if (information instanceof String) {
 				geometricClass = Util.getGeometricElementsClass((String)information);
@@ -151,7 +166,7 @@ public class MainController {
 				try {
 					//对话框读入用户输入的参数
 					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname+": x1,y1,x2,y2,....,xn,yn,colorcode"), shortClassname, JOptionPane.QUESTION_MESSAGE);
-					System.out.println(input);
+//					System.out.println(input);
 					String [] inputList = input.split(",");
 					System.out.println(inputList.length);
 					if ((inputList.length % 2) != 1) {throw new Exception();}
@@ -195,23 +210,32 @@ public class MainController {
 				buttonName = (String)information;
 			}else return;
 			ListItem<GeometricModelElement> newG =null;
+			try {
 			switch (buttonName) {
 				case "Move": System.out.println("move");
+						String movePara = JOptionPane.showInputDialog(mainView, new String("please input a Direction Vector, like \"x,y\""), "move", JOptionPane.QUESTION_MESSAGE);
+						String [] mp = movePara.split(","); 
 						newG = PictureManipulator
-						.movePic(model.getPicture(positionOfSelectedPicture), 1, 1);// need change parameter
+						.movePic(model.getPicture(positionOfSelectedPicture), Double.parseDouble(mp[0]), Double.parseDouble(mp[1]));
             					break;
 				case "Scale":System.out.println("scale"); 
+						String scalepara = JOptionPane.showInputDialog(mainView, new String("please input the scale factor"), "scale", JOptionPane.QUESTION_MESSAGE);
 						newG = PictureManipulator
-						.scalePic(model.getPicture(positionOfSelectedPicture), 1.5);// need change parameter
+						.scalePic(model.getPicture(positionOfSelectedPicture), Double.parseDouble(scalepara));// need change parameter
 							break;
 				case "Rotation": System.out.println("rotation");
+						String roPara = JOptionPane.showInputDialog(mainView, new String("please input the angle"), "rotate", JOptionPane.QUESTION_MESSAGE);
 						newG = PictureManipulator
-						.rotatePic(model.getPicture(positionOfSelectedPicture), 15);// need change parameter
+						.rotatePic(model.getPicture(positionOfSelectedPicture), Double.parseDouble(roPara));// need change parameter
 							break;
-				case "Mirroring": System.out.println("mirroring");;
+				case "Mirroring": System.out.println("mirroring");
+						String miPara = JOptionPane.showInputDialog(mainView, new String("please input axis, x or y"), "mirror", JOptionPane.QUESTION_MESSAGE);
+						if (miPara.compareToIgnoreCase("x")!=0 || miPara.compareToIgnoreCase("y")!=0) {throw new Exception();}
 						newG = PictureManipulator
-						.mirrorPic(model.getPicture(positionOfSelectedPicture), "x");// need change parameter				
+						.mirrorPic(model.getPicture(positionOfSelectedPicture), miPara.toLowerCase());// need change parameter				
 							break;
+			}}catch(Exception e) {
+				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
 			}
 			model.changePicture(newG, positionOfSelectedPicture);
 			ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(newG);

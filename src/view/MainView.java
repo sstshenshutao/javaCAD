@@ -73,7 +73,7 @@ public class MainView extends JFrame {
 	private void initPanel(String[] pictureNames) {
 		// make it possible to close the window and at once to exit the process
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+		setExtendedState( this.getExtendedState()|JFrame.MAXIMIZED_BOTH );
 		// get the dimension of the screen
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) screenSize.getWidth() / 2;
@@ -123,7 +123,7 @@ public class MainView extends JFrame {
 		// ----------------------------------- Button: ZEICHNEN ----------------------------------- \\
 		// create a second panel
 		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new BorderLayout());
+		buttonPane.setLayout(new GridLayout(1, 4));
 		// crate a button with the label "Zeichnen"
 		JButton print = new JButton("Zeichnen");
 		// add an ActionListener to be informed of an user interaction
@@ -136,7 +136,7 @@ public class MainView extends JFrame {
 			}
 		});
 		// add the button to the left side of the second panel
-		buttonPane.add(print, BorderLayout.EAST);
+		buttonPane.add(print);
 
 		// ----------------------------------- Button: SPEICHERN ----------------------------------- \\
 		// crate a button with the label "Speichern"
@@ -151,7 +151,7 @@ public class MainView extends JFrame {
 			}
 		});
 		// add the button to the left side of the second panel
-		buttonPane.add(save, BorderLayout.WEST);
+		buttonPane.add(save);
 
 		// ----------------------------------- Button: ÖFFNEN ----------------------------------- \\
 		// crate a button with the label "�ffnen"
@@ -166,11 +166,27 @@ public class MainView extends JFrame {
 			}
 		});
 		// add the button to the left side of the second panel
-		buttonPane.add(open, BorderLayout.CENTER);
+		buttonPane.add(open);
+
+		
+		// ----------------------------------- Button: Neu ----------------------------------- \\
+		// crate a button with the label "�ffnen"
+		JButton newFile = new JButton("Neu");
+		// add an ActionListener to be informed of an user interaction
+		newFile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// inform the controller of the user interaction
+				MainController.getInstance().setUserInput(Constants.ACTION_EVENT_NEW, null);
+			}
+		});
+		// add the button to the left side of the second panel
+		buttonPane.add(newFile);
 
 		// add the second panel to the bottom of the frame panel
 		add(buttonPane, BorderLayout.SOUTH);
-
+		
 		// ----------------------------------- Button: DO ----------------------------------- \\
 		// create a new third panel and set the LayoutManager
 		JPanel controllPanel = new JPanel();
@@ -260,6 +276,7 @@ public class MainView extends JFrame {
 		scrollPane.setMinimumSize(new Dimension(frameWidth - 50, frameHeight - 90));
 
 		add(scrollPane, BorderLayout.CENTER);
+		updateView();
 	}
 
 	/**
