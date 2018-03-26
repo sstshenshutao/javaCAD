@@ -48,24 +48,18 @@ public class ButtonFactory {
 		try {jIcon=new ImageIcon(jTitel+".ico");}	catch (Exception e) {jIcon=null;}
 		System.out.println(jIcon.toString());
 		JButton jButton = null;	
-		if (jIcon!=null) {jButton=new JButton(jIcon);}else {jButton=new JButton(jTitel);}
+		if (jIcon!=null) {jButton=new JButton(jIcon);}
 		jButton.setToolTipText(new String(jTitel));
 		jButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// inform the controller of the user interaction
-				MainController.getInstance().setUserInput(interaction, opName);
+				MainController.getInstance().setUserInput(interaction, jTitel);
 			}
 		});
 		return jButton;
 	}
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

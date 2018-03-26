@@ -251,7 +251,34 @@ public class MainView extends JFrame {
 		controllPanel.add(mirroring);
 		// add the third panel to the left of the frame panel
 		add(controllPanel, BorderLayout.EAST);
-				
+		
+		// ----------------------------------- SelectChangeButton ----------------------------------- \\
+		//use Factory to add Buttons
+		JButton selmove = ButtonFactory.makeChangeButton("SelMove", Constants.ACTION_EVENT_CHANGE);
+		JButton selscale = ButtonFactory.makeChangeButton("SelScale", Constants.ACTION_EVENT_CHANGE);
+		JButton selrotation = ButtonFactory.makeChangeButton("SelRotation", Constants.ACTION_EVENT_CHANGE);
+		JButton selmirroring = ButtonFactory.makeChangeButton("SelMirroring", Constants.ACTION_EVENT_CHANGE);
+		controllPanel.add(selmove);
+		controllPanel.add(selscale);
+		controllPanel.add(selrotation);
+		controllPanel.add(selmirroring);
+		// add the third panel to the left of the frame panel
+		add(controllPanel, BorderLayout.EAST);
+		
+		
+		// ----------------------------------- RemoveLast Removefirst ----------------------------------- \\
+		JButton removeLast = ButtonFactory.makeChangeButton("RemoveLast", Constants.ACTION_EVENT_CHANGE);
+		controllPanel.add(removeLast);
+		JButton removeFirst = ButtonFactory.makeChangeButton("RemoveFirst", Constants.ACTION_EVENT_CHANGE);
+		controllPanel.add(removeFirst);
+		// add the third panel to the left of the frame panel
+		add(controllPanel, BorderLayout.EAST);
+		
+		// ----------------------------------- ChangeOrderButton ----------------------------------- \\
+		JButton shiftRight = ButtonFactory.makeChangeButton("ShiftRight", Constants.ACTION_EVENT_CHANGE);
+		controllPanel.add(shiftRight);
+		JButton shiftleft = ButtonFactory.makeChangeButton("Shiftleft", Constants.ACTION_EVENT_CHANGE);
+		controllPanel.add(shiftleft);
 		pack();
 		setVisible(true);
 	}

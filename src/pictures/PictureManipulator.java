@@ -1,5 +1,6 @@
 package pictures;
 
+import Aufgabe_1.V.V;
 import data.ListItem;
 import model.GeometricModelElement;
 
@@ -114,5 +115,26 @@ public class PictureManipulator {
 		}
 		return newGraphic;
 	}
+	
+	public static ListItem<GeometricModelElement> parabola (ListItem<GeometricModelElement> g1, double speed) {
+		double g = -9.8/10;
+		double v= speed/10;
+		V<GeometricModelElement> V= new V<>();
+		ListItem<GeometricModelElement> ghead= g1;
+		ListItem<GeometricModelElement> finalList=null;
+		for(int i=0;i<5;i++) {
+			ListItem<GeometricModelElement> turnList=null;
+			for (int j=1;j<=ghead.getSize();j++) {
+				finalList.insert(ghead.get(j));
+				GeometricModelElement cloneE = ghead.get(j).cloneElement();
+				cloneE.move(v, g);
+				turnList.insert(cloneE);
+				finalList.insert(cloneE);
+			}
+			ghead=turnList;
+		}
+		return finalList;
+	}
+	
 	
 }

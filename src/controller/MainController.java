@@ -10,6 +10,9 @@ import javax.json.JsonReader;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import Aufgabe_1.A.A;
+import Aufgabe_1.B.B;
+import Aufgabe_1.C.C;
 import data.ListItem;
 import model.GeometricModelElement;
 import model.Point;
@@ -203,7 +206,8 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
-		//GeoButton:
+		//ChangeButton:
+		
 		if (code == Constants.ACTION_EVENT_CHANGE) {
 			String buttonName = null;
 			if (information instanceof String) {
@@ -239,9 +243,72 @@ public class MainController {
 						newG = PictureManipulator
 						.mirrorPic(model.getPicture(positionOfSelectedPicture), miPara.trim());// need change parameter				
 							break;
+				case "SelMove": 
+					//have already used b.selecttype
+						GeometricModelElement[] changeList = getSelect();
+						String selmovePara = JOptionPane.showInputDialog(mainView, new String("please input a Direction Vector, like \"x,y\""), "move", JOptionPane.QUESTION_MESSAGE);
+						if (selmovePara==null) return;
+						String [] smp = selmovePara.split(","); 
+						if (smp.length!=2) {throw new Exception();}
+						for(GeometricModelElement m: changeList) {
+							m.move(Double.parseDouble(smp[0]), Double.parseDouble(smp[1]));
+						}
+						newG = model.getPicture(positionOfSelectedPicture);
+						break;
+				case "SelScale": 
+					GeometricModelElement[] changeLists = getSelect();
+					String selScalePara = JOptionPane.showInputDialog(mainView, new String("please input the scale factor"), "scale", JOptionPane.QUESTION_MESSAGE);
+					if (selScalePara==null) return;
+					for(GeometricModelElement m: changeLists) {
+						m.scale(Double.parseDouble(selScalePara));
+					}
+					newG = model.getPicture(positionOfSelectedPicture);
+					break;
+				case "SelRotation": 
+					GeometricModelElement[] changeListr = getSelect();
+					String selRotationPara = JOptionPane.showInputDialog(mainView, new String("please input the angle"), "rotate", JOptionPane.QUESTION_MESSAGE);
+					if (selRotationPara==null) return;
+					for(GeometricModelElement m: changeListr) {
+						m.rotate(Double.parseDouble(selRotationPara));
+					}
+					newG = model.getPicture(positionOfSelectedPicture);
+					break;
+				case "SelMirroring": 
+					GeometricModelElement[] changeListm = getSelect();
+					String selMirroringPara = JOptionPane.showInputDialog(mainView, new String("please input axis, x or y"), "mirror", JOptionPane.QUESTION_MESSAGE);
+					if (selMirroringPara==null) return;
+					for(GeometricModelElement m: changeListm) {
+						m.mirror(selMirroringPara);
+					}
+					newG = model.getPicture(positionOfSelectedPicture);
+					break;
+				case "RemoveLast" :
+					//have already used c.removelast
+					C<GeometricModelElement> C = new C<>();
+					if (model.getPicture(positionOfSelectedPicture).getSize()!=1)
+					newG = C.removeLast(model.getPicture(positionOfSelectedPicture));
+					break;
+				case "RemoveFirst" :
+					//have already used b.removehead
+					B<GeometricModelElement> B = new B<>();
+					if (model.getPicture(positionOfSelectedPicture).getSize()!=1)
+					newG = B.removeHead(model.getPicture(positionOfSelectedPicture));
+					break;
+				case "Shiftleft"	:
+					//have already used a.ringShiftLeft
+					A<GeometricModelElement> A = new A<>();
+					newG = A.ringShiftLeft(model.getPicture(positionOfSelectedPicture));
+//					newG = PictureManipulator.parabola(model.getPicture(positionOfSelectedPicture),40);
+					break;
+				case "ShiftRight":
+					//have already used b.ringShiftRight
+					B<GeometricModelElement> Bs = new B<>();
+					newG = Bs.ringShiftRight(model.getPicture(positionOfSelectedPicture));
+					break;
 			}}catch(Exception e) {
 				e.getStackTrace();
-//				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
+				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
+				return;
 			}
 			model.changePicture(newG, positionOfSelectedPicture);
 			ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(newG);
@@ -297,5 +364,18 @@ public class MainController {
 		this.positionOfSelectedPicture = model.getLength() - 1;
 		mainView.addPictureName(n);
 		mainView.showPicture(gView);
+	}
+	
+	private GeometricModelElement[] getSelect() {
+		B<GeometricModelElement> B = new B<>();
+		String selCode = JOptionPane.showInputDialog(mainView, new String("please input the select class, "
+				+ "for example: circle will change all the circles."), "mirror", JOptionPane.QUESTION_MESSAGE);
+		String clazz = SelectAndChange.parsePradicate(selCode);
+		Class<? extends GeometricModelElement> geometricClass = null;
+		if (clazz!=null) {
+			geometricClass = Util.getGeometricElementsClass(clazz);
+		}else return null;
+		ListItem<GeometricModelElement> glist = model.getPicture(positionOfSelectedPicture);
+		return B.selectType(glist, geometricClass);
 	}
 }
