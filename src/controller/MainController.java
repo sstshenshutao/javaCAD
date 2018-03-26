@@ -214,28 +214,34 @@ public class MainController {
 			switch (buttonName) {
 				case "Move": System.out.println("move");
 						String movePara = JOptionPane.showInputDialog(mainView, new String("please input a Direction Vector, like \"x,y\""), "move", JOptionPane.QUESTION_MESSAGE);
+						if (movePara==null) return;
 						String [] mp = movePara.split(","); 
+						if (mp.length!=2) {throw new Exception();}
 						newG = PictureManipulator
 						.movePic(model.getPicture(positionOfSelectedPicture), Double.parseDouble(mp[0]), Double.parseDouble(mp[1]));
             					break;
 				case "Scale":System.out.println("scale"); 
 						String scalepara = JOptionPane.showInputDialog(mainView, new String("please input the scale factor"), "scale", JOptionPane.QUESTION_MESSAGE);
+						if (scalepara==null) return;
 						newG = PictureManipulator
 						.scalePic(model.getPicture(positionOfSelectedPicture), Double.parseDouble(scalepara));// need change parameter
 							break;
 				case "Rotation": System.out.println("rotation");
 						String roPara = JOptionPane.showInputDialog(mainView, new String("please input the angle"), "rotate", JOptionPane.QUESTION_MESSAGE);
+						if (roPara==null) return;
 						newG = PictureManipulator
 						.rotatePic(model.getPicture(positionOfSelectedPicture), Double.parseDouble(roPara));// need change parameter
 							break;
 				case "Mirroring": System.out.println("mirroring");
 						String miPara = JOptionPane.showInputDialog(mainView, new String("please input axis, x or y"), "mirror", JOptionPane.QUESTION_MESSAGE);
 						if (miPara.compareToIgnoreCase("x")!=0 || miPara.compareToIgnoreCase("y")!=0) {throw new Exception();}
+						if (miPara==null) return;
 						newG = PictureManipulator
-						.mirrorPic(model.getPicture(positionOfSelectedPicture), miPara.toLowerCase());// need change parameter				
+						.mirrorPic(model.getPicture(positionOfSelectedPicture), "x");// need change parameter				
 							break;
 			}}catch(Exception e) {
-				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
+				e.getStackTrace();
+//				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
 			}
 			model.changePicture(newG, positionOfSelectedPicture);
 			ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(newG);
