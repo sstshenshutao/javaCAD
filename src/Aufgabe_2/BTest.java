@@ -12,6 +12,7 @@ import model.Point;
 import model.angled.AngledGeometricElement;
 import model.angled.HexagonElement;
 import model.angled.SquareElement;
+import model.angled.TriangleElement;
 import model.round.CircleElement;
 import model.round.EllipseElement;
 
@@ -95,13 +96,23 @@ public class BTest {
 	@Test
 	public void insertSingle_Test_2() {
 		int a1 = 1;
-		ListItem<Integer> lst = new ListItem<>(null);
+		ListItem<Integer> lst = new ListItem<>(0);
 		ListItem<Integer> nlst = A.insertSingle(lst, a1, new ComparatorInteger());
+		Assert.assertEquals((Integer) 0, nlst.key);
+		Assert.assertEquals((Integer) 1, nlst.next.key);
 	}
 
 	@Test
 	public void insertSingle_Test_3() {
-
+		int a1 = 1;
+		int a2 = 2;
+		int a3 = 3;
+		ListItem<Integer> lst = new ListItem<>(a1);
+		lst.insert(a2);
+		lst.insert(a3);
+		ListItem<Integer> nlst = A.insertSingle(lst, a1, new ComparatorInteger());
+		Assert.assertEquals((Integer) 1, nlst.key);
+		Assert.assertEquals((Integer) 3, nlst.get(4));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -236,18 +247,17 @@ public class BTest {
 		lst1.insert(b3);
 		GeometricModelElement[] arr = B.selectType(lst1, EllipseElement.class).clone();
 		Assert.assertEquals(b1, arr[0]);
-		Assert.assertEquals(b2, arr[1]);
-		Assert.assertEquals(b3, arr[2]);
+		Assert.assertEquals(c1, arr[1]);
+		Assert.assertEquals(b2, arr[2]);
 	}
 
 	@Test
 	public void selectType_Test_3() {
-		CircleElement c1 = new CircleElement();
-		CircleElement c2 = new CircleElement();
+		EllipseElement c1 = new EllipseElement();
+		EllipseElement c2 = new EllipseElement();
 		ListItem<GeometricModelElement> lst1 = new ListItem<>(c1);
 		lst1.insert(c2);
-		GeometricModelElement[] arr = B.selectType(lst1, EllipseElement.class).clone();
-		Assert.assertNull(arr);
+		Assert.assertNull(B.selectType(lst1, CircleElement.class));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
