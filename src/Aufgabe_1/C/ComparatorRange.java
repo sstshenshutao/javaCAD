@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import model.angled.AngledGeometricElement;
 import model.Point;
+import util.Util;
 
 /**
  * Die Klasse implementiert einen java.util.Comparator, welcher den Vergleich anhang des Umfangs durchführt. Dabei ist
@@ -15,7 +16,8 @@ public class ComparatorRange implements Comparator<AngledGeometricElement> {
 	 * implementiert. Die Methode führt den Vergleich anhand des Umfangs durch. Dabei ist ein kleinerer Umfang als
 	 * kleiner zu bewerten.
 	 */
-	public double getLength(Point[] points) {
+	public float getLength(AngledGeometricElement elem) {
+	    Point[] points = elem.getPoints();
 	    double distance = 0;
 	    for (int i = 0; i < points.length; i++) {
 	        Point itemA = points[i];
@@ -31,12 +33,11 @@ public class ComparatorRange implements Comparator<AngledGeometricElement> {
 		
 	@Override
 	public int compare(AngledGeometricElement elem1, AngledGeometricElement elem2) {
-	    if(getLength(elem1.getPoints()) == getLength(elem2.getPoints())) {
+	    if(elem1.getLength == elem2.getLength) 
 		   return 0;
-	    }else if(getLength(elem1.getPoints()) > getLength(elem2.getPoints())) {    	
-		         return 1;
-	    }else {  
-		       return -1;  
+	    else if(elem1.getLength > elem2.getLength)    	
+		   return 1;
+	    else  
+		   return -1;  
 		}  
 	}
-}
