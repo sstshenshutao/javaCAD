@@ -298,17 +298,21 @@ public class MainController {
 					//have already used a.ringShiftLeft
 					A<GeometricModelElement> A = new A<>();
 					newG = A.ringShiftLeft(model.getPicture(positionOfSelectedPicture));
-//					newG = PictureManipulator.parabola(model.getPicture(positionOfSelectedPicture),40);
-					break;
+//					break;
 				case "ShiftRight":
 					//have already used b.ringShiftRight
 					B<GeometricModelElement> Bs = new B<>();
 					newG = Bs.ringShiftRight(model.getPicture(positionOfSelectedPicture));
 					break;
+				case "Parabola":
+					//
+					newG = PictureManipulator.parabola(model.getPicture(positionOfSelectedPicture),80);
+					System.out.println(newG.getSize());
+					break;
 			}}catch(Exception e) {
 				e.getStackTrace();
-				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
-				return;
+//				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
+//				return;
 			}
 			model.changePicture(newG, positionOfSelectedPicture);
 			ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(newG);

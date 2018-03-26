@@ -22,13 +22,20 @@ public class TriangleElement extends AngledGeometricElement {
 		return Constants.GEOMETRIC_ANGLED_TRIANGLE_ELEMENT;
 	}
 
-	/* (non-Javadoc)
-	 * @see model.GeometricModelElement#cloneElement()
-	 */
 	@Override
-	public GeometricModelElement cloneElement() {
-		// TODO Auto-generated method stub
-		return null;
+	public TriangleElement cloneElement() {
+		TriangleElement angleEle = new TriangleElement();
+
+		// copy the points
+		Point[] p = new Point[super.getPoints().length];
+		for (int i = 0; i < p.length; i++) {
+			Point old = super.getPoint(i);
+			Point n = new Point(old.getX(), old.getY());
+			p[i] = n;
+		}
+		angleEle.setPoints(p);
+		angleEle.changeColorCode(super.getColorCode());
+		return angleEle;
 	}
 
 }

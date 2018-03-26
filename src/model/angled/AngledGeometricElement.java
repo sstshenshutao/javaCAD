@@ -1,7 +1,11 @@
 package model.angled;
 
+import java.util.HashMap;
+
 import model.GeometricModelElement;
 import model.Point;
+import model.round.CircleElement;
+import util.Constants;
 import util.Util;
 
 /**
