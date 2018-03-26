@@ -234,10 +234,10 @@ public class MainController {
 							break;
 				case "Mirroring": System.out.println("mirroring");
 						String miPara = JOptionPane.showInputDialog(mainView, new String("please input axis, x or y"), "mirror", JOptionPane.QUESTION_MESSAGE);
-						if (miPara.compareToIgnoreCase("x")!=0 || miPara.compareToIgnoreCase("y")!=0) {throw new Exception();}
+//						if (miPara.compareToIgnoreCase("x")!=0 || miPara.compareToIgnoreCase("y")!=0) {throw new Exception();}
 						if (miPara==null) return;
 						newG = PictureManipulator
-						.mirrorPic(model.getPicture(positionOfSelectedPicture), "x");// need change parameter				
+						.mirrorPic(model.getPicture(positionOfSelectedPicture), miPara.trim());// need change parameter				
 							break;
 			}}catch(Exception e) {
 				e.getStackTrace();
