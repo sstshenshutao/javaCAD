@@ -6,8 +6,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import com.oracle.tools.packager.RelativeFileSet.Type;
-
 import Aufgabe_1.V.ComparatorInteger;
 import Aufgabe_1.V.V;
 
@@ -33,35 +31,45 @@ public class B<T> {
 	 *             if arr is null
 	 */
 	public void rotateQuadrupleLeft(T[] arr) throws IllegalArgumentException {
-		T fst = null;
-		if (arr.length<4) return;
-		try {
-			//record the first Element of array, if arr eine null-Referenz goto catch
-			fst = arr[0];
-			//recursive start
-			rotateQuadrupleLeftRec(arr, 0);
-		}catch(IndexOutOfBoundsException e) {
-			//recursive end
-			arr[arr.length-1] = fst;
-		}catch(NullPointerException e) {
-			throw new IllegalArgumentException();
-		}
-		return;
+		if (arr==null) throw new IllegalArgumentException();
+		if (arr.length<4) return;else
+		rotateQuadrupleLeftRec2(arr,0);
 	}
+//	0 1 2 3  4 5 6 7
 	/**
 	 * Recursive helper method for rotateQuadrupleLeft.
 	 *
 	 * @param arr
 	 *            the array to work on
 	 * @param index
+	 * 
+	 * @return the next index
 	 */
-	private void rotateQuadrupleLeftRec(T[] arr, int index) {
+	private int rotateQuadrupleLeftRec(T[] arr, int index) {
 		// If the array is null, throw the IndexOutOfBoundsException, let the callfunction handle it.
 		arr[index]=arr[index+1];
 		//else recursive shift
-		rotateQuadrupleLeftRec(arr, index+1);
+		if (index % 4==2) { return index+2;}
+		else {return
+		rotateQuadrupleLeftRec(arr, index+1);}
 	}
-
+	/**
+	 * Recursive helper method2 for rotateQuadrupleLeft.
+	 * @param arr
+	 * 				the array to work on
+	 * @param index
+	 */
+	private void rotateQuadrupleLeftRec2(T[] arr, int index) {
+		T fst = null;
+		int iRec=index;
+		if (arr.length-iRec >= 4) {
+			fst = arr[iRec];
+			iRec=rotateQuadrupleLeftRec(arr, iRec);
+			arr[iRec-1] = fst;
+			rotateQuadrupleLeftRec2(arr, iRec);
+		}
+	}
+	
 	/**
 	 * Fügt den Parameter key in den gemäß cmp aufsteigend sortierten Parameter lst ein. Nach dem Einfügen muss der
 	 * Parameter lst aufsteigend nach cmp vom Typ java.util.Comparator sortiert sein. Die Methode gibt den Kopf der
@@ -173,14 +181,14 @@ public class B<T> {
 	 */
 	public ListItem<ListItem<T>> listInLists(ListItem<T> lst) {
 		ListItem<ListItem<T>> llst= new ListItem<ListItem<T>>(null);
+		ListItem<ListItem<T>> retlst = llst;
 		for(ListItem<T> p = lst; p != null; p= p.next ) {
-			ListItem<T> tmp = new ListItem<T>(p.key);
+			ListItem<ListItem<T>> tmp = new ListItem<ListItem<T>>(p);
 			tmp.next = null;
-			ListItem<ListItem<T>> tmpl = new ListItem<ListItem<T>>(tmp);
-			llst.next = tmpl;
+			llst.next = tmp;
 			llst = llst.next;
 		}
-		return llst.next;
+		return retlst.next;
 	}
 
 	/**
