@@ -1,0 +1,24 @@
+{
+  "name":"Parabola",
+  "data":[
+    {
+      "classname":"geometric.round.ellipse.CircleElement",
+      "elementData":{
+        "colorcode":1,
+        "points":[
+          {
+            "x":1.0,
+            "y":1.0
+          },
+          {
+            "x":2.0,
+            "y":2.0
+          }
+        ],
+        "metaData":{
+          
+        }
+      }
+    }
+  ]
+}
