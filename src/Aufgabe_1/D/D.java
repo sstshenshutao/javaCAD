@@ -53,10 +53,13 @@ public class D<T> {
 	 * @return the list lst with elem added to the end
 	 */
 	public ListItem<T> insertLast(ListItem<T> lst, ListItem<T> elem) {
+		if (lst == null)
+			lst = new ListItem<T>(null);
+		ListItem<T> temp = elem;
 		for (int i = 0; i < elem.getSize(); i++)
 		{
-			lst.insert(elem.key);
-			elem = elem.next;
+			lst.insert(temp.key);
+			temp = temp.next;
 		}
 		return lst;
 	}
@@ -76,6 +79,8 @@ public class D<T> {
 	public ListItem<T> removeSecMaxElement(ListItem<T> lst, Comparator<T> cmp) throws IllegalArgumentException {
 		if (cmp == null)
 			throw new IllegalArgumentException();
+		if (lst == null)
+			return null;
 		
 		int n =lst.getSize();
 		T max = null;
@@ -167,6 +172,8 @@ public class D<T> {
 			nlst.insert(temp3);
 			nlst.insert(temp2);
 			nlst.insert(temp1);
+			if (lst == null)
+				return nlst;
 			nlst.next.next.next = invertTriples(lst);
 			index++;
 			return nlst;
@@ -203,7 +210,7 @@ public class D<T> {
 			ListItem<T> lst1 = new ListItem<T>(null);
 			ListItem<T> lst2 = new ListItem<T>(null);
 			ListItem<ListItem<T>> nlst = new ListItem<ListItem<T>>(lst1);
-			nlst.next.key = lst2;
+			nlst.next = new ListItem<ListItem<T>>(lst2);
 			return nlst;
 		}
 		else if (lst.getSize() == 1)
@@ -211,7 +218,7 @@ public class D<T> {
 			ListItem<T> lst1 = new ListItem<T>(lst.key);
 			ListItem<T> lst2 = new ListItem<T>(null);
 			ListItem<ListItem<T>> nlst = new ListItem<ListItem<T>>(lst1);
-			nlst.next.key = lst2;
+			nlst.next = new ListItem<ListItem<T>>(lst2);
 			return nlst;
 		}
 		else
@@ -220,7 +227,7 @@ public class D<T> {
 			ListItem<T> lst1 = hilfeIntoList(lst);
 			ListItem<T> lst2 =  hilfeIntoList(nst);
 			ListItem<ListItem<T>> nlst = new ListItem<ListItem<T>>(lst1);
-			nlst.next.key = lst2;
+			nlst.next = new ListItem<ListItem<T>>(lst2);
 			return nlst;
 		}
 	}

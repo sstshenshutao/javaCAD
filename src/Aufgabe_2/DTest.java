@@ -1,22 +1,18 @@
 package Aufgabe_2;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Comparator;
-
-import data.ListItem;
-import Aufgabe_1.D.D;
 import Aufgabe_1.D.ComparatorRadius;
+import Aufgabe_1.D.D;
 import Aufgabe_1.V.ComparatorInteger;
-import model.GeometricModelElement;
+import data.ListItem;
 import model.Point;
 import model.angled.AngledGeometricElement;
-import model.angled.SquareElement;
 import model.angled.RectangleElement;
+import model.angled.SquareElement;
 import model.round.CircleElement;
 
 public class DTest {
@@ -30,18 +26,18 @@ public class DTest {
 	
 	@Test
 	public void switchElements_Test_1() {
-		Integer[] sArr = d.switchElements(arr1, 0, 1);
+		d.switchElements(arr1, 0, 1);
 		Integer[] eArr = {86, 54, 234, 155};
 		
-		Assert.assertTrue(eArr.equals(sArr));
+		Assert.assertTrue(eArr[0].equals(arr1[0]));
 	}
 
 	@Test
 	public void switchElements_Test_2() {
-		Integer[] sArr = d.switchElements(arr1, 2, 3);
+		d.switchElements(arr1, 2, 3);
 		Integer[] eArr = {54, 86, 155, 234};
 		
-		Assert.assertTrue(eArr.equals(sArr));
+		Assert.assertTrue(eArr[2].equals(arr1[2]));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -166,9 +162,9 @@ public class DTest {
 	@Test
 	public void invertTriples_Test_1() {
 		ListItem<Integer> lst = new ListItem<>(55);
-		oriLst.insert(44);
-		oriLst.insert(33);
-		oriLst.insert(22);
+		lst.insert(44);
+		lst.insert(33);
+		lst.insert(22);
 		ListItem<Integer> newLst = d.invertTriples(lst);
 		
 		ListItem<Integer> eLst = new ListItem<>(33);
@@ -182,11 +178,11 @@ public class DTest {
 	@Test
 	public void invertTriples_Test_2() {
 		ListItem<Integer> lst = new ListItem<>(55);
-		oriLst.insert(44);
-		oriLst.insert(33);
-		oriLst.insert(22);
-		oriLst.insert(11);
-		oriLst.insert(66);
+		lst.insert(44);
+		lst.insert(33);
+		lst.insert(22);
+		lst.insert(11);
+		lst.insert(66);
 		ListItem<Integer> newLst = d.invertTriples(lst);
 		
 		ListItem<Integer> eLst = new ListItem<>(33);
@@ -220,20 +216,20 @@ public class DTest {
 		lst.insert(77);
 		lst.insert(66);
 		
-		ListItem<ListItem<Integer>> newLst = d.divideAlternatinglyIntoLists(lst);
+		ListItem<Integer> lst1 = new ListItem<>(95);
+		lst1.insert(35);
+		lst1.insert(11);
+		lst1.insert(63);
+		lst1.insert(66);
+		ListItem<Integer> lst2 = new ListItem<>(5);
+		lst2.insert(2);
+		lst2.insert(24);
+		lst2.insert(77);
+		ListItem<ListItem<Integer>> eLst = new ListItem<ListItem<Integer>>(lst1);
+		eLst.insert(lst2);
 		
-		ListItem<ListItem<Integer>> eLst = new ListItem<ListItem<>>(95);
-		eLst.insert(35);
-		eLst.insert(11);
-		eLst.insert(63);
-		eLst.insert(66);
-		eLst.insert(5);
-		eLst.insert(2);
-		eLst.insert(24);
-		eLst.insert(77);
-		
-		assertTrue(eLst.equals(newLst));
-		
+		assertTrue((eLst.key.key) == d.divideAlternatinglyIntoLists(lst).key.key);
+		assertTrue((eLst.next.key.key) == d.divideAlternatinglyIntoLists(lst).next.key.key);
 	}
 
 	@Test
@@ -243,23 +239,24 @@ public class DTest {
 		lst.insert(3);
 		lst.insert(4);
 		
-		ListItem<ListItem<Integer>> newLst = d.divideAlternatinglyIntoLists(lst);
+		d.divideAlternatinglyIntoLists(lst);
+		ListItem<Integer> lst1 = new ListItem<>(1);
+		lst1.insert(3);
+		ListItem<Integer> lst2 = new ListItem<>(2);
+		lst2.insert(4);
+		ListItem<ListItem<Integer>> eLst = new ListItem<ListItem<Integer>>(lst1);
+		eLst.insert(lst2);
 		
-		ListItem<ListItem<Integer>> eLst = new ListItem<ListItem<>>(1);
-		eLst.insert(3);
-		eLst.insert(2);
-		eLst.insert(4);
-		
-		assertTrue(eLst.equals(newLst));	
+		assertTrue((eLst.key.key).equals(d.divideAlternatinglyIntoLists(lst).key.key));
+		assertTrue((eLst.next.key.key).equals(d.divideAlternatinglyIntoLists(lst).next.key.key));	
 	}
 
 	@Test
 	public void divideAlternatinglyIntoLists_Test_3() {
 		ListItem<Integer> lst= new ListItem<>(5);
-	    ListItem<ListItem<Integer>> newLst = d.divideAlternatinglyIntoLists(lst);
-		ListItem<ListItem<Integer>> eLst = new ListItem<ListItem<>>(5);
-		
-		assertTrue(eLst.equals(newLst));	
+		ListItem<ListItem<Integer>> eLst = new ListItem<ListItem<Integer>>(lst);
+		ListItem<Integer> nlst= new ListItem<>(5);
+		assertTrue((eLst.key.key).equals(d.divideAlternatinglyIntoLists(nlst).key.key));	
 
 	}
 
@@ -270,7 +267,7 @@ public class DTest {
 	@Test
 	public void listIntoArray_Test_1() {
 		ListItem<Integer> lst= new ListItem<>(67);
-        Integer[] arr= d.listIntoArray(lst, intValue());
+        Integer[] arr= d.listIntoArray(lst, Integer.class);
 		
 		Integer[] eArr= {67};
 		
@@ -282,12 +279,12 @@ public class DTest {
 	@Test
 	public void listIntoArray_Test_2() {
 		ListItem<Integer> lst= new ListItem<>(5);
-		expectLst.insert(4);
-		expectLst.insert(3);
-		expectLst.insert(2);
-		expectLst.insert(1);
+		lst.insert(4);
+		lst.insert(3);
+		lst.insert(2);
+		lst.insert(1);
 		
-		Integer[] arr= d.listIntoArray(lst, intValue());
+		Integer[] arr= d.listIntoArray(lst, Integer.class);
 		Integer[] eArr= {5,4,3,2,1};
 		
 		
@@ -300,17 +297,17 @@ public class DTest {
 	public void listIntoArray_Test_3() {
 		ListItem<Integer> lst = null;
 		
-		d.listIntoArray(lst, intValue());
+		d.listIntoArray(lst, Integer.class);
 	}
 
 
 	@Test(expected = IllegalArgumentException.class)
 	public void listIntoArray_Test_4() {
 		ListItem<Integer> lst= new ListItem<>(5);
-		expectLst.insert(4);
-		expectLst.insert(3);
-		expectLst.insert(2);
-		expectLst.insert(1);
+		lst.insert(4);
+		lst.insert(3);
+		lst.insert(2);
+		lst.insert(1);
 		
 		d.listIntoArray(lst, null);
 	}
@@ -378,11 +375,10 @@ public class DTest {
 		AngledGeometricElement s1 = new RectangleElement();
 		Point[] points = new Point[]{new Point(0, 0), new Point(0, 4), new Point(2, 4), new Point(2, 0)};
 		s1.setPoints(points);
-		s1.rotate(90);
+		s1.rotate(180);
 		Point[] newp = s1.getPoints();
 		  
-		Assert.assertTrue(newp[0].getX() == -1);
-		Assert.assertTrue(newp[2].getY() == 1);
+		Assert.assertTrue(newp[2].equals(new Point(0, 0)));
 
 	}
 
@@ -391,11 +387,10 @@ public class DTest {
 		 AngledGeometricElement s1 = new SquareElement();
 		 Point[] points = new Point[]{new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(1, 0)};
 		 s1.setPoints(points);
-		 s1.rotate(3600);
+		 s1.rotate(360);
 		 Point[] newp = s1.getPoints();
 		 
-		 Assert.assertTrue(newp[0].getX() == 0);
-		 Assert.assertTrue(newp[2].getY() == 1);
+		 Assert.assertTrue(newp[0].equals(new Point(0, 0)));
 
 	}
 }
