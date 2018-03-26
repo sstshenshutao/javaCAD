@@ -41,12 +41,21 @@ public abstract class AngledGeometricElement extends GeometricModelElement {
 		double centerX = (maxX+minX)/2;
 		double centerY = (maxY+minY)/2;
 		
+		
+//		[cosa -sina (1-cosa)tx+tysina]	[x]
+//		[sina cosa (1-cosa)ty-txsina)]	[y]
+//				[0 0 1]					[1]
 //		x'=(x-cx)cosa+(y-cy)(-sina)+cx
 //		y'=(x-cx)sina+(y-cy)cosa+cy
 		for (Point point : points) {
-			point.setX((point.getX() - centerX) * Math.cos(angle) + (point.getY() - centerY) * (-1) * Math.sin(angle)+ centerX);
-			point.setY((point.getX() - centerX) * Math.sin(angle) + (point.getY() - centerY) *  Math.cos(angle)+ centerY);
+			double tx=point.getX() - centerX;
+			double ty=point.getY() - centerY;
+			double x =point.getX();
+			double y =point.getY();
+			point.setX(tx * Math.cos(angle/360*Math.PI)- ty * Math.sin(angle/360*Math.PI)+centerX);
+			point.setY(tx * Math.sin(angle/360*Math.PI)+ ty * Math.cos(angle/360*Math.PI)+centerY);
 		}
+		
 
 	}
 
