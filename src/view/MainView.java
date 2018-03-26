@@ -210,9 +210,18 @@ public class MainView extends JFrame {
 
 		// add the third panel to the left of the frame panel
 		add(controllPanel, BorderLayout.EAST);
-		// ----------------------------------- parabolaButton ----------------------------------- \\
+		// ----------------------------------- Aufgabe4 Button ----------------------------------- \\
 				JButton parabola = ButtonFactory.makeChangeButton("Parabola", Constants.ACTION_EVENT_CHANGE);
 				controllPanel.add(parabola);
+				JButton attraction = ButtonFactory.makeChangeButton("Attraction", Constants.ACTION_EVENT_CHANGE);
+				controllPanel.add(attraction);
+				JButton sinxpic = ButtonFactory.makeChangeButton("Sinxpic", Constants.ACTION_EVENT_CHANGE);
+				controllPanel.add(sinxpic);
+				JButton cosxpic = ButtonFactory.makeChangeButton("Cosxpic", Constants.ACTION_EVENT_CHANGE);
+				controllPanel.add(cosxpic);
+				JButton sunrise = ButtonFactory.makeChangeButton("Sunrise", Constants.ACTION_EVENT_CHANGE);
+				controllPanel.add(sunrise);
+				 
 
 		// ----------------------------------- DrawPanel and GeometricButton ----------------------------------- \\
 		// add the button to the third panel and set the LayoutManager

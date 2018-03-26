@@ -313,8 +313,20 @@ public class MainController {
 				case "Parabola":
 					//
 					newG = PictureManipulator.parabola(model.getPicture(positionOfSelectedPicture),80);
-					System.out.println(newG.getSize());
 					break;
+				case "Attraction" :
+					newG = PictureManipulator.attraction(model.getPicture(positionOfSelectedPicture),5);
+					break;
+				case "Sinxpic" :
+					newG = PictureManipulator.sinxpic(model.getPicture(positionOfSelectedPicture),5);
+					break;
+				case "Cosxpic" :
+					newG = PictureManipulator.cosxpic(model.getPicture(positionOfSelectedPicture),5);
+					break;
+				case "Sunrise":
+					newG = PictureManipulator.sunrise(model.getPicture(positionOfSelectedPicture),5,5);
+					break;
+					
 			}}catch(Exception e) {
 				e.getStackTrace();
 //				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
