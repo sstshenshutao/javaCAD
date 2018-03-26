@@ -43,7 +43,7 @@ public class PictureManipulator {
 	 * @return
 	 */
 	public static ListItem<GeometricModelElement> rotatePic(ListItem<GeometricModelElement> g, double angle) {
-		ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
+		try {ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
 
 		for (int j = 1; j <= g.getSize(); j++) {
 			GeometricModelElement e = g.get(j);
@@ -51,7 +51,9 @@ public class PictureManipulator {
 			e.rotate(angle);
 			newGraphic.insert(e);
 		}
-		return newGraphic;
+		return newGraphic;}catch(Exception e) {
+			return g;
+		}
 	}
 	
 	/**
@@ -65,7 +67,7 @@ public class PictureManipulator {
 	 * @return
 	 */
 	public static ListItem<GeometricModelElement> movePic(ListItem<GeometricModelElement> g, double xDirection, double yDirection) {
-		ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
+		try{ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
 
 		for (int j = 1; j <= g.getSize(); j++) {
 			GeometricModelElement e = g.get(j);
@@ -73,7 +75,9 @@ public class PictureManipulator {
 			e.move(xDirection, yDirection);
 			newGraphic.insert(e);
 		}
-		return newGraphic;
+		return newGraphic;}catch(Exception e) {
+			return g;
+		}
 	}
 	
 	/**
@@ -85,6 +89,7 @@ public class PictureManipulator {
 	 * @return
 	 */
 	public static ListItem<GeometricModelElement> mirrorPic(ListItem<GeometricModelElement> g, String axis) {
+		try {
 		ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
 
 		for (int j = 1; j <= g.getSize(); j++) {
@@ -93,7 +98,9 @@ public class PictureManipulator {
 			e.mirror(axis);
 			newGraphic.insert(e);
 		}
-		return newGraphic;
+		return newGraphic;}catch(Exception e) {
+			return g;
+		}
 	}
 	
 	/**
@@ -105,21 +112,63 @@ public class PictureManipulator {
 	 * @return
 	 */
 	public static ListItem<GeometricModelElement> scalePic(ListItem<GeometricModelElement> g, double factor) {
-		ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
-
-		for (int j = 1; j <= g.getSize(); j++) {
-			GeometricModelElement e = g.get(j);
-			// scale
-			e.scale(factor);
-			newGraphic.insert(e);
+		try {
+			ListItem<GeometricModelElement> newGraphic = new ListItem<GeometricModelElement>(null);
+			for (int j = 1; j <= g.getSize(); j++) {
+				GeometricModelElement e = g.get(j);
+				// scale
+				e.scale(factor);
+				newGraphic.insert(e);
+			}
+			return newGraphic;}
+		catch(Exception e) {
+			return g;
 		}
-		return newGraphic;
 	}
 	
+	/**
+	 * draw a parabola of the first item of the List
+	 * @param g1
+	 * @param speed
+	 * @return
+	 */
 	public static ListItem<GeometricModelElement> parabola (ListItem<GeometricModelElement> g1, double speed) {
-		double g = -9.8/40;
+		try {double g = -9.8/40;
 		double h =0;
 		double v= speed/40;
+		V<GeometricModelElement> V= new V<>();
+		ListItem<GeometricModelElement> ghead= g1;
+		ListItem<GeometricModelElement> finalList= new ListItem<GeometricModelElement>(null);
+		GeometricModelElement accc= ghead.key;
+		finalList.insert(accc);
+		int c=1;
+		for(int i=0;i<16;i++) {
+			h+=g;
+			GeometricModelElement cloneE =accc.cloneElement();
+			cloneE.move(v, h);
+			cloneE.rotate(-10);
+			if(cloneE.getColorCode()<=1) c=1;else if (cloneE.getColorCode()>=9) c=-1;
+			cloneE.changeColorCode(cloneE.getColorCode()+c);
+			finalList.insert(cloneE);
+			accc=cloneE;
+		}
+		
+		return finalList;}
+		catch(Exception e) {
+			return g1;
+		}
+	}
+	
+	/**
+	 * @param g1
+	 * @param speed
+	 * @return
+	 */
+	public static ListItem<GeometricModelElement> attraction (ListItem<GeometricModelElement> g1, double speed) {
+		if (g1.getSize() != 2) return g1;
+		g1.key.getPoints()
+		
+		
 		V<GeometricModelElement> V= new V<>();
 		ListItem<GeometricModelElement> ghead= g1;
 		ListItem<GeometricModelElement> finalList= new ListItem<GeometricModelElement>(null);

@@ -168,11 +168,17 @@ public class MainController {
 				while (!signal)
 				try {
 					//对话框读入用户输入的参数
-					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname+": x1,y1,x2,y2,....,xn,yn,colorcode"), shortClassname, JOptionPane.QUESTION_MESSAGE);
+					String pointMessage="";
+					for(int i=1;i<=geometricElem.getNumberOfPoints();i++) {
+						pointMessage+="x"+i+",y"+i+",";
+					}
+					String input = JOptionPane.showInputDialog(mainView, new String("please give the parameter to draw the "+ shortClassname+
+							" ,need "+geometricElem.getNumberOfPoints()+" points, input it in Form: "
+									+ pointMessage+"colorcode(1-9)"), shortClassname, JOptionPane.QUESTION_MESSAGE);
 //					System.out.println(input);
 					String [] inputList = input.split(",");
 					System.out.println(inputList.length);
-					if ((inputList.length % 2) != 1) {throw new Exception();}
+					if ((inputList.length) != geometricElem.getNumberOfPoints()*2 + 1) {throw new Exception();}
 					Point[] points = new Point[inputList.length/2];
 					for (int i=0; i<inputList.length -1 ; i+=2) {
 						points[i/2]=new Point(Double.parseDouble(inputList[i]), Double.parseDouble(inputList[i+1]));
@@ -314,6 +320,7 @@ public class MainController {
 //				JOptionPane.showMessageDialog(mainView,"opration failed, please do it again");
 //				return;
 			}
+			if(newG==null) return;
 			model.changePicture(newG, positionOfSelectedPicture);
 			ListItem<GeometricGraphicElement> gView = GeometricsFactory.makePicture(newG);
 			view.changePicture(gView, positionOfSelectedPicture);

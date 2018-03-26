@@ -14,6 +14,10 @@ import util.Constants;
 public class TriangleElement extends AngledGeometricElement {
 
 	
+	public TriangleElement() {
+		super(new Point[] { new Point(0, 0), new Point(0, 0) , new Point(0, 0)});
+	}
+
 	/* (non-Javadoc)
 	 * @see model.GeometricModelElement#getJSONClassName()
 	 */

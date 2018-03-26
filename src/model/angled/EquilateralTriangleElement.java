@@ -12,12 +12,7 @@ import util.Constants;
  */
 public class EquilateralTriangleElement extends TriangleElement {
 
-	/**
-	 * 
-	 */
-	public EquilateralTriangleElement() {
-		// TODO Auto-generated constructor stub
-	}
+
 	
 	
 

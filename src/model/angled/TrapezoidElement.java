@@ -7,7 +7,7 @@ import util.Constants;
 public class TrapezoidElement extends AngledGeometricElement {
 
 	public TrapezoidElement() {
-		// TODO Auto-generated constructor stub
+		super(new Point[] { new Point(0, 0),new Point(0, 0), new Point(0, 0) , new Point(0, 0)});
 	}
 
 	@Override

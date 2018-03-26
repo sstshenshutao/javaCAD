@@ -15,6 +15,14 @@ import util.Util;
  */
 public abstract class AngledGeometricElement extends GeometricModelElement {
 
+	/**
+	 * @param points
+	 */
+	public AngledGeometricElement(Point[] points) {
+		super(points);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	protected void calculateMove(double xDirection, double yDirection) {
 		Point[] points = this.getPoints();

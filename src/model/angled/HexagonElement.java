@@ -6,6 +6,9 @@ import util.Constants;
 
 public class HexagonElement extends AngledGeometricElement {
 
+	public HexagonElement() {
+		super(new Point[] { new Point(0, 0),new Point(0, 0), new Point(0, 0),new Point(0, 0), new Point(0, 0) , new Point(0, 0)});
+	}
 	
 	@Override
 	protected String getJSONClassName() {
