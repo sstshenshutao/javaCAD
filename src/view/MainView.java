@@ -237,9 +237,8 @@ public class MainView extends JFrame {
 		JButton isoscelesTrapezoid=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_TRAPEZOID_ISOSCELESTRAPEZOID_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton rectangle=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_RECTANGLE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
 		JButton square=ButtonFactory.makeGeometricButton(Constants.GEOMETRIC_ANGLED_RECTANGLE_SQUARE_ELEMENT, Constants.ACTION_EVENT_GEOMETRIC);
-		
-		controllPanel.add(circle);
 		controllPanel.add(ellipse);
+		controllPanel.add(circle);
 		controllPanel.add(triangle);
 		controllPanel.add(equilateralTriangle);
 		controllPanel.add(hexagon);
