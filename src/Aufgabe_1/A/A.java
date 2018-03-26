@@ -213,7 +213,7 @@ public class A<T> {
 			else
 			{
 				nlsts.insert(klst);
-				klst = new ListItem<T>(null);
+				klst = new ListItem<T>(arr[i]);
 			}
 		}
 		nlsts.insert(klst);

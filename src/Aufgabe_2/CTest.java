@@ -231,16 +231,11 @@ public class CTest {
 		ListItem<Integer> newLst = c.combineLists(oriLst1, oriLst2);
 		
 		//expect
-		ListItem<Integer> expectLst= new ListItem<>(15);
-		expectLst.insert(5);
-		expectLst.insert(14);
-		expectLst.insert(4);
-		expectLst.insert(13);
-		expectLst.insert(3);
-		expectLst.insert(12);
+		ListItem<Integer> expectLst= new ListItem<>(4);
+		expectLst.insert(15);
 		expectLst.insert(2);
+		expectLst.insert(13);
 		expectLst.insert(11);
-		expectLst.insert(1);
 		
 		assertTrue(expectLst.equals(newLst));
 	}
@@ -262,12 +257,9 @@ public class CTest {
 		ListItem<Integer> newLst = c.combineLists(oriLst1, oriLst2);
 		
 		//expect
-		ListItem<Integer> expectLst= new ListItem<>(15);
-		expectLst.insert(5);
-		expectLst.insert(14);
-		expectLst.insert(4);
+		ListItem<Integer> expectLst= new ListItem<>(4);
+		expectLst.insert(15);
 		expectLst.insert(13);
-		expectLst.insert(3);
 		expectLst.insert(12);
 		expectLst.insert(11);
 		expectLst.insert(10);
@@ -292,13 +284,10 @@ public class CTest {
 		ListItem<Integer> newLst = c.combineLists(oriLst1, oriLst2);
 		
 		//expect
-		ListItem<Integer> expectLst= new ListItem<>(15);
-		expectLst.insert(5);
-		expectLst.insert(14);
-		expectLst.insert(4);
-		expectLst.insert(13);
-		expectLst.insert(3);
+		ListItem<Integer> expectLst= new ListItem<>(4);
+		expectLst.insert(15);
 		expectLst.insert(2);
+		expectLst.insert(13);
 		expectLst.insert(1);
 		expectLst.insert(0);
 		

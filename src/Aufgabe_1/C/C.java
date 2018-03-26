@@ -175,16 +175,32 @@ public class C<T> {
 	 * @return the combined list
 	 */
 	public ListItem<T> combineLists(ListItem<T> lst1, ListItem<T> lst2) {
-		  if (lst1 == null)
+		if (lst1 == null)
 		   return lst2;
 		  else if (lst2 == null)
 		   return lst1;
 		  else
 		  {
-		   ListItem<T> lst = new ListItem<T>(lst2.key);
-		   lst.next = new ListItem<T>(lst1.key);
-		   lst.next.next = combineLists(lst1.next, lst2.next);
-		   return lst;
+			  if (lst1.getSize() < 2)
+			  {
+				  ListItem<T> lst = lst2;
+				  return lst;
+			  }
+			  
+			  if (lst2.getSize() < 2)
+			  {
+				  
+				  ListItem<T> lst = new ListItem<>(lst1.next.key);
+				  lst.next = new ListItem<>(lst2.key);
+				  lst.next.next = combineLists(lst1.next.next, null);
+				  return lst;
+			  }
+			  
+			  
+			  ListItem<T> lst = new ListItem<>(lst1.next.key);
+			  lst.next = new ListItem<>(lst2.key);
+			  lst.next.next = combineLists(lst1.next.next, lst2.next.next);
+			  return lst;
 		  }
 	}
 

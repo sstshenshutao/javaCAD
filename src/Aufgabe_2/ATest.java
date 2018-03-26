@@ -1,21 +1,20 @@
 package Aufgabe_2;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.Comparator;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Comparator;
-
-import data.ListItem;
 import Aufgabe_1.A.A;
+import Aufgabe_1.A.ComparatorColor;
 import Aufgabe_1.V.ComparatorInteger;
+import data.ListItem;
 import model.Point;
-import model.GeometricModelElement;
 import model.angled.AngledGeometricElement;
-import model.angled.SquareElement;
 import model.angled.RectangleElement;
+import model.angled.SquareElement;
 import model.round.CircleElement;
 import model.round.RoundGeometricElement;
 
@@ -32,26 +31,26 @@ public class ATest {
 	
 	@Test
 	public void invertTriples_Test_1() {
-		Integer[] iArr = a.invertTriples(arr1);
+		a.invertTriples(arr1);
         Integer[] eArr = {3,2,1,6,5,4,7};
 		
-        Assert.assertTrue(eArr.equals(iArr));
+        Assert.assertTrue(arr1[0] == eArr[0]);
 	}
 
 	@Test
 	public void invertTriples_Test_2() {
-		Integer[] iArr = a.invertTriples(arr2);
+		a.invertTriples(arr2);
         Integer[] eArr = {3,2,1};
 		
-        Assert.assertTrue(eArr.equals(iArr));    
+        Assert.assertTrue(arr2[2] == eArr[2]);    
 	}
 
 	@Test
 	public void invertTriples_Test_3() {
-		Integer[] iArr = a.invertTriples(arr3);
+		a.invertTriples(arr3);
         Integer[] eArr = {1,2};
 		
-        Assert.assertTrue(eArr.equals(iArr));        
+        Assert.assertTrue(arr3[0] == eArr[0]);        
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -98,8 +97,8 @@ public class ATest {
 		
 		ListItem<Integer> newLst = a.insertSingleHead(lst,9);
 		
-		ListItem<Integer> eLst = new ListItem<>(8);
-		eLst.insert(9);
+		ListItem<Integer> eLst = new ListItem<>(9);
+		eLst.insert(8);
 		
 		Assert.assertTrue(eLst.equals(newLst));
 	}
@@ -114,8 +113,8 @@ public class ATest {
 		lst.insert(5);
 		lst.insert(3);
 		lst.insert(2);
-		
-		ListItem<Integer> newLst = a.removeElementsEqualX(lst, 2, intValue());
+		Comparator cmp = new ComparatorInteger();
+		ListItem<Integer> newLst = a.removeElementsEqualX(lst, 2, cmp);
 		
 		ListItem<Integer> eLst = new ListItem<>(4);
 		eLst.insert(5);
@@ -131,8 +130,8 @@ public class ATest {
 		lst.insert(3);
 		lst.insert(3);
 		lst.insert(2);
-		
-		ListItem<Integer> newLst = a.removeElementsEqualX(lst, 3, intValue());
+		Comparator cmp = new ComparatorInteger();
+		ListItem<Integer> newLst = a.removeElementsEqualX(lst, 3, cmp);
 		
 		ListItem<Integer> eLst = new ListItem<>(4);
 		eLst.insert(5);
@@ -144,7 +143,8 @@ public class ATest {
 	@Test(expected = IllegalArgumentException.class)
 	public void removeElementsEqualX_Test_3() {
 		ListItem<Integer> lst= new ListItem<>(8);
-		a.removeElementsEqualX(lst, null, intValue());
+		Comparator cmp = new ComparatorInteger();
+		a.removeElementsEqualX(lst, null, cmp);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -198,10 +198,10 @@ public class ATest {
 
 	@Test
 	public void listsInList_Test_1() {
-		ListItem<ListItem<Integer>> lsts = new ListItem<ListItem<>>(95);
-		lst.insert(35);
-		lst.insert(11);
-		lst.insert(63);
+		ListItem<ListItem<Integer>> lsts = new ListItem<ListItem<Integer>>(new ListItem<Integer>(95));
+		lsts.insert(new ListItem<Integer>(35));
+		lsts.insert(new ListItem<Integer>(11));
+		lsts.insert(new ListItem<Integer>(63));
 		
 		ListItem<Integer> newLst = a.listsInList(lsts);
 		
@@ -216,11 +216,11 @@ public class ATest {
 
 	@Test
 	public void listsInList_Test_2() {
-		ListItem<ListItem<Integer>> lsts = new ListItem<ListItem<>>(9);
-		lst.insert(8);
-		lst.insert(7);
-		lst.insert(6);
-		lst.insert(5);
+		ListItem<ListItem<Integer>> lsts = new ListItem<ListItem<Integer>>(new ListItem<Integer>(9));
+		lsts.insert(new ListItem<Integer>(8));
+		lsts.insert(new ListItem<Integer>(7));
+		lsts.insert(new ListItem<Integer>(6));
+		lsts.insert(new ListItem<Integer>(5));
 		
 		ListItem<Integer> newLst = a.listsInList(lsts);
 		
@@ -236,9 +236,9 @@ public class ATest {
 
 	@Test
 	public void listsInList_Test_3() {
-		ListItem<ListItem<Integer>> lsts = new ListItem<ListItem<>>(3);
-		lst.insert(2);
-		lst.insert(1);
+		ListItem<ListItem<Integer>> lsts = new ListItem<ListItem<Integer>>(new ListItem<Integer>(3));
+		lsts.insert(new ListItem<Integer>(2));
+		lsts.insert(new ListItem<Integer>(1));
 		
 		ListItem<Integer> newLst = a.listsInList(lsts);
 		
@@ -264,26 +264,28 @@ public class ATest {
 	@Test
 	public void arrayRunsToListOfLists_Test_1() {
 		Integer[] arr= {1,2,3};
+		Comparator cmp = new ComparatorInteger();
+		ListItem<Integer> newLst = (ListItem<Integer>) a.arrayRunsToListOfLists(arr, cmp).key;
+		ListItem<Integer> erlst = new ListItem<Integer>(1);
+		erlst.insert(2);
+		erlst.insert(3);
+		ListItem<ListItem<Integer>> elsts = new ListItem<ListItem<Integer>>(erlst);
+
 		
-		ListItem<Integer> newLst = a.arrayRunsToListOfLists(arr, intValue());
-		ListItem<ListItem<Integer>> elsts = new ListItem<ListItem<>>(1);
-		elsts.insert(2);
-		elsts.insert(3);
-		
-		assertTrue(eLsts.equals(newLst));
+		assertTrue((elsts.key).equals(newLst));
 	}
 
 	@Test
 	public void arrayRunsToListOfLists_Test_2() {
 		Integer[] arr= {};
-		
-		Assert.assertNull(a.arrayRunsToListOfLists(arr, intValue()));	
+		Comparator cmp = new ComparatorInteger();
+		Assert.assertNull(a.arrayRunsToListOfLists(arr, cmp));	
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void arrayRunsToListOfLists_Test_3() {
-
-		a.arrayRunsToListOfLists(null, intValue());
+		Comparator cmp = new ComparatorInteger();
+		a.arrayRunsToListOfLists(null, cmp);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
