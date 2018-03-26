@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -191,8 +193,10 @@ public class MainView extends JFrame {
 		// create a new third panel and set the LayoutManager
 		JPanel controllPanel = new JPanel();
 		controllPanel.setLayout(new GridLayout(15, 1));
-
-		JButton doSomething = new JButton("DO");
+		Icon jIcon=null;
+		try {jIcon=new ImageIcon("do.ico");}	catch (Exception e) {jIcon=null;}
+		JButton doSomething = null;
+		if (jIcon!=null) {doSomething=new JButton(jIcon);}else {doSomething=new JButton("DO");}
 		doSomething.addActionListener(new ActionListener() {
 
 			@Override
